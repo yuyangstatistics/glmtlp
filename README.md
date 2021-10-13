@@ -1,3 +1,1 @@
-# glmtlp
-# glmtlp
 # glmtlp webpage
