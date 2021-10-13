@@ -44,6 +44,9 @@
   </a>
 </li>
 <li>
+  <a href="articles/glmtlp.html">Get started</a>
+</li>
+<li>
   <a href="reference/index.html">Reference</a>
 </li>
 <li>
@@ -67,7 +70,7 @@
 <a href="#glmtlp" class="anchor"></a>glmtlp</h1></div>
 <!-- badges: start -->
 <!-- badges: end -->
-<p>The goal of glmtlp is to fit generalized linear models with l0, l1 and truncated lasso penalty.</p>
+<p>The goal of glmtlp is to fit generalized linear models with l0, l1 and truncated lasso penalty with a fast procedure.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -75,34 +78,30 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"glmtlp"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="example" class="section level2">
+<div id="examples" class="section level2">
 <h2 class="hasAnchor">
-<a href="#example" class="anchor"></a>Example</h2>
-<p>This is a basic example which shows you how to solve a common problem:</p>
+<a href="#examples" class="anchor"></a>Examples</h2>
+<p>This is a basic example which shows you how to use <code>glmtlp</code>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">glmtlp</span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yuyangyy.com/glmtlp/">glmtlp</a></span><span class="op">)</span>
 <span class="co">#&gt; Loading required package: foreach</span>
 <span class="co">#&gt; Loading required package: parallel</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"gau_data"</span><span class="op">)</span>
 <span class="va">cv.fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/cv.glmtlp.html">cv.glmtlp</a></span><span class="op">(</span><span class="va">gau_data</span><span class="op">$</span><span class="va">X</span>, <span class="va">gau_data</span><span class="op">$</span><span class="va">y</span>, family <span class="op">=</span> <span class="st">"gaussian"</span>, penalty <span class="op">=</span> <span class="st">"tlp"</span>, ncores<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cv.fit</span><span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/README-example-1.png" width="100%"></p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">cv.fit</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">cv.fit</span><span class="op">)</span>
 <span class="co">#&gt;   intercept          V1          V2          V3          V4          V5 </span>
-<span class="co">#&gt; -0.01462262  0.99418244  0.00000000  0.00000000  0.00000000  0.00000000 </span>
+<span class="co">#&gt; -0.01461624  0.99420306  0.00000000  0.00000000  0.00000000  0.00000000 </span>
 <span class="co">#&gt;          V6          V7          V8          V9         V10         V11 </span>
-<span class="co">#&gt;  0.89829254  0.00000000  0.00000000  0.00000000  0.86095932  0.00000000 </span>
+<span class="co">#&gt;  0.89831963  0.00000000  0.00000000  0.00000000  0.86098059  0.00000000 </span>
 <span class="co">#&gt;         V12         V13         V14         V15         V16         V17 </span>
-<span class="co">#&gt;  0.00000000  0.00000000  0.00000000  0.97499582  0.00000000  0.00000000 </span>
+<span class="co">#&gt;  0.00000000  0.00000000  0.00000000  0.97501117  0.00000000  0.00000000 </span>
 <span class="co">#&gt;         V18         V19         V20 </span>
-<span class="co">#&gt;  0.00000000  0.00000000  0.88057426</span>
-
-<span class="va">cv.fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/cv.glmtlp.html">cv.glmtlp</a></span><span class="op">(</span><span class="va">gau_data</span><span class="op">$</span><span class="va">X</span>, <span class="va">gau_data</span><span class="op">$</span><span class="va">y</span>, family <span class="op">=</span> <span class="st">"gaussian"</span>, penalty <span class="op">=</span> <span class="st">"l0"</span>, ncores<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
+<span class="co">#&gt;  0.00000000  0.00000000  0.88057318</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cv.fit</span><span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/README-example-2.png" width="100%"></p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">cv.fit</span><span class="op">)</span>
+<p><img src="reference/figures/README-example1-1.png" width="100%"></p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">cv.fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/cv.glmtlp.html">cv.glmtlp</a></span><span class="op">(</span><span class="va">gau_data</span><span class="op">$</span><span class="va">X</span>, <span class="va">gau_data</span><span class="op">$</span><span class="va">y</span>, family <span class="op">=</span> <span class="st">"gaussian"</span>, penalty <span class="op">=</span> <span class="st">"l0"</span>, ncores<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">cv.fit</span><span class="op">)</span>
 <span class="co">#&gt;   intercept          V1          V2          V3          V4          V5 </span>
 <span class="co">#&gt; -0.08612171  0.85744742  0.00000000  0.00000000  0.00000000  0.00000000 </span>
 <span class="co">#&gt;          V6          V7          V8          V9         V10         V11 </span>
@@ -111,21 +110,30 @@
 <span class="co">#&gt;  0.00000000  0.00000000  0.00000000  0.92340689  0.00000000  0.00000000 </span>
 <span class="co">#&gt;         V18         V19         V20 </span>
 <span class="co">#&gt;  0.00000000  0.00000000  0.92553573</span>
-
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"bin_data"</span><span class="op">)</span>
-<span class="va">cv.fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/cv.glmtlp.html">cv.glmtlp</a></span><span class="op">(</span><span class="va">bin_data</span><span class="op">$</span><span class="va">X</span>, <span class="va">bin_data</span><span class="op">$</span><span class="va">y</span>, family <span class="op">=</span> <span class="st">"binomial"</span>, penalty <span class="op">=</span> <span class="st">"l1"</span>, ncores<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cv.fit</span><span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/README-example-3.png" width="100%"></p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">cv.fit</span><span class="op">)</span>
-<span class="co">#&gt;    intercept           V1           V2           V3           V4           V5 </span>
-<span class="co">#&gt; -0.177047437  0.143053660  0.000000000  0.000000000  0.000000000 -0.226773242 </span>
-<span class="co">#&gt;           V6           V7           V8           V9          V10          V11 </span>
-<span class="co">#&gt;  0.373233870 -0.383963001  0.000000000  0.221140054  0.019063141  0.000000000 </span>
-<span class="co">#&gt;          V12          V13          V14          V15          V16          V17 </span>
-<span class="co">#&gt;  0.000000000 -0.058402839  0.000000000  0.293766193  0.000000000  0.000000000 </span>
-<span class="co">#&gt;          V18          V19          V20 </span>
-<span class="co">#&gt;  0.000000000  0.005986592  0.564046262</span></code></pre></div>
+<p><img src="reference/figures/README-example2-1.png" width="100%"></p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"bin_data"</span><span class="op">)</span>
+<span class="va">cv.fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/cv.glmtlp.html">cv.glmtlp</a></span><span class="op">(</span><span class="va">bin_data</span><span class="op">$</span><span class="va">X</span>, <span class="va">bin_data</span><span class="op">$</span><span class="va">y</span>, family <span class="op">=</span> <span class="st">"binomial"</span>, penalty <span class="op">=</span> <span class="st">"l1"</span>, ncores<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">cv.fit</span><span class="op">)</span>
+<span class="co">#&gt;   intercept          V1          V2          V3          V4          V5 </span>
+<span class="co">#&gt; -0.12906933  0.30481693  0.00000000  0.00000000  0.00000000 -0.33522378 </span>
+<span class="co">#&gt;          V6          V7          V8          V9         V10         V11 </span>
+<span class="co">#&gt;  0.48272656 -0.52613795  0.00000000  0.25935963  0.12429385  0.04212470 </span>
+<span class="co">#&gt;         V12         V13         V14         V15         V16         V17 </span>
+<span class="co">#&gt;  0.00000000 -0.16147507  0.07527975  0.40731409  0.00000000  0.04078650 </span>
+<span class="co">#&gt;         V18         V19         V20 </span>
+<span class="co">#&gt;  0.00000000  0.07057177  0.65833815</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cv.fit</span><span class="op">)</span></code></pre></div>
+<p><img src="reference/figures/README-example3-1.png" width="100%"></p>
+</div>
+<div id="references" class="section level2">
+<h2 class="hasAnchor">
+<a href="#references" class="anchor"></a>References</h2>
+<!-- MLA style -->
+<p>Shen, Xiaotong, Wei Pan, and Yunzhang Zhu. “Likelihood-based selection and sharp parameter estimation.” <em>Journal of the American Statistical Association</em> 107.497 (2012): 223-232. <a href="https://doi.org/10.1080/01621459.2011.645783" class="uri">https://doi.org/10.1080/01621459.2011.645783</a>.</p>
+<p>Tibshirani, Robert, et al. “Strong rules for discarding predictors in lasso‐type problems.” <em>Journal of the Royal Statistical Society: Series B (Statistical Methodology)</em> 74.2 (2012): 245-266. <a href="https://doi.org/10.1111/j.1467-9868.2011.01004.x" class="uri">https://doi.org/10.1111/j.1467-9868.2011.01004.x</a>.</p>
+<p>Yang, Yi, and Hui Zou. “A coordinate majorization descent algorithm for l1 penalized learning.” <em>Journal of Statistical Computation and Simulation</em> 84.1 (2014): 84-95. <a href="https://doi.org/10.1080/00949655.2012.695374" class="uri">https://doi.org/10.1080/00949655.2012.695374</a>.</p>
 </div>
 </div>
   </div>
