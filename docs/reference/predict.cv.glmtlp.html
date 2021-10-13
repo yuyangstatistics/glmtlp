@@ -219,16 +219,16 @@ and the <code>cv.glmtlp</code> function.</p></div>
 <span class='va'>y</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>100</span><span class='op'>)</span>
 <span class='va'>cv.fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='cv.glmtlp.html'>cv.glmtlp</a></span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>y</span>, family <span class='op'>=</span> <span class='st'>"gaussian"</span>, penalty <span class='op'>=</span> <span class='st'>"l1"</span>, ncores<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>cv.fit</span>, X <span class='op'>=</span> <span class='va'>X</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>, <span class='op'>]</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] -0.0385279  0.2072894  0.1714689  0.1171646  0.1203098</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span><span class='op'>(</span><span class='va'>cv.fit</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] -0.03859463  0.20723538  0.17143357  0.11709940  0.12029681</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span><span class='op'>(</span><span class='va'>cv.fit</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;   intercept          V1          V2          V3          V4          V5 
-#&gt;  0.08881710  0.00000000  0.00000000  0.00000000  0.00000000  0.00000000 
+#&gt;  0.08881033  0.00000000  0.00000000  0.00000000  0.00000000  0.00000000 
 #&gt;          V6          V7          V8          V9         V10         V11 
-#&gt;  0.00000000  0.00000000  0.00000000  0.00000000 -0.14000879  0.00000000 
+#&gt;  0.00000000  0.00000000  0.00000000  0.00000000 -0.13995064  0.00000000 
 #&gt;         V12         V13         V14         V15         V16         V17 
-#&gt;  0.00000000  0.00000000  0.00000000  0.00000000  0.00000000 -0.03037846 
+#&gt;  0.00000000  0.00000000  0.00000000  0.00000000  0.00000000 -0.03041960 
 #&gt;         V18         V19         V20 
 #&gt;  0.00000000  0.00000000  0.00000000 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>cv.fit</span>, X <span class='op'>=</span> <span class='va'>X</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>, <span class='op'>]</span>, lambda <span class='op'>=</span> <span class='fl'>0.1</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] -0.1825828  0.2703167  0.2246877  0.1082621  0.1360842</div><div class='input'>
+</div><div class='output co'>#&gt; [1] -0.1825950  0.2703188  0.2246891  0.1082554  0.1360938</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

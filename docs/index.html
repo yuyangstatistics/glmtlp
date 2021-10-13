@@ -81,7 +81,7 @@
 <div id="examples" class="section level2">
 <h2 class="hasAnchor">
 <a href="#examples" class="anchor"></a>Examples</h2>
-<p>This is a basic example which shows you how to use <code>glmtlp</code>:</p>
+<p>The following are three examples which show you how to use <code>glmtlp</code>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yuyangyy.com/glmtlp/">glmtlp</a></span><span class="op">)</span>
 <span class="co">#&gt; Loading required package: foreach</span>
@@ -90,42 +90,87 @@
 <span class="va">cv.fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/cv.glmtlp.html">cv.glmtlp</a></span><span class="op">(</span><span class="va">gau_data</span><span class="op">$</span><span class="va">X</span>, <span class="va">gau_data</span><span class="op">$</span><span class="va">y</span>, family <span class="op">=</span> <span class="st">"gaussian"</span>, penalty <span class="op">=</span> <span class="st">"tlp"</span>, ncores<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">cv.fit</span><span class="op">)</span>
 <span class="co">#&gt;   intercept          V1          V2          V3          V4          V5 </span>
-<span class="co">#&gt; -0.01461624  0.99420306  0.00000000  0.00000000  0.00000000  0.00000000 </span>
+<span class="co">#&gt; -0.01462027  0.99417031  0.00000000  0.00000000  0.00000000  0.00000000 </span>
 <span class="co">#&gt;          V6          V7          V8          V9         V10         V11 </span>
-<span class="co">#&gt;  0.89831963  0.00000000  0.00000000  0.00000000  0.86098059  0.00000000 </span>
+<span class="co">#&gt;  0.89829054  0.00000000  0.00000000  0.00000000  0.86093926  0.00000000 </span>
 <span class="co">#&gt;         V12         V13         V14         V15         V16         V17 </span>
-<span class="co">#&gt;  0.00000000  0.00000000  0.00000000  0.97501117  0.00000000  0.00000000 </span>
+<span class="co">#&gt;  0.00000000  0.00000000  0.00000000  0.97496891  0.00000000  0.00000000 </span>
 <span class="co">#&gt;         V18         V19         V20 </span>
-<span class="co">#&gt;  0.00000000  0.00000000  0.88057318</span>
+<span class="co">#&gt;  0.00000000  0.00000000  0.88058520</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cv.fit</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-example1-1.png" width="100%"></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/glmtlp.html">glmtlp</a></span><span class="op">(</span><span class="va">gau_data</span><span class="op">$</span><span class="va">X</span>, <span class="va">gau_data</span><span class="op">$</span><span class="va">y</span>, family <span class="op">=</span> <span class="st">"gaussian"</span>, penalty <span class="op">=</span> <span class="st">"tlp"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">fit</span>, lambda <span class="op">=</span> <span class="va">cv.fit</span><span class="op">$</span><span class="va">lambda.min</span><span class="op">)</span>
+<span class="co">#&gt;   intercept          V1          V2          V3          V4          V5 </span>
+<span class="co">#&gt; -0.01462346  0.99416110  0.00000000  0.00000000  0.00000000  0.00000000 </span>
+<span class="co">#&gt;          V6          V7          V8          V9         V10         V11 </span>
+<span class="co">#&gt;  0.89828549  0.00000000  0.00000000  0.00000000  0.86094835  0.00000000 </span>
+<span class="co">#&gt;         V12         V13         V14         V15         V16         V17 </span>
+<span class="co">#&gt;  0.00000000  0.00000000  0.00000000  0.97498324  0.00000000  0.00000000 </span>
+<span class="co">#&gt;         V18         V19         V20 </span>
+<span class="co">#&gt;  0.00000000  0.00000000  0.88058869</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">fit</span>, X <span class="op">=</span> <span class="va">gau_data</span><span class="op">$</span><span class="va">X</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="op">]</span>, lambda <span class="op">=</span> <span class="va">cv.fit</span><span class="op">$</span><span class="va">lambda.min</span><span class="op">)</span>
+<span class="co">#&gt; [1] -2.0580246  0.6086993 -0.1049771 -0.8392137  2.3234783</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">fit</span>, xvar <span class="op">=</span> <span class="st">"log_lambda"</span>, label <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<p><img src="reference/figures/README-example1-2.png" width="100%"></p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cv.fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/cv.glmtlp.html">cv.glmtlp</a></span><span class="op">(</span><span class="va">gau_data</span><span class="op">$</span><span class="va">X</span>, <span class="va">gau_data</span><span class="op">$</span><span class="va">y</span>, family <span class="op">=</span> <span class="st">"gaussian"</span>, penalty <span class="op">=</span> <span class="st">"l0"</span>, ncores<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">cv.fit</span><span class="op">)</span>
 <span class="co">#&gt;   intercept          V1          V2          V3          V4          V5 </span>
-<span class="co">#&gt; -0.08612171  0.85744742  0.00000000  0.00000000  0.00000000  0.00000000 </span>
+<span class="co">#&gt; -0.08612557  0.85740421  0.00000000  0.00000000  0.00000000  0.00000000 </span>
 <span class="co">#&gt;          V6          V7          V8          V9         V10         V11 </span>
-<span class="co">#&gt;  0.73126672  0.00000000  0.00000000  0.00000000  0.00000000  0.00000000 </span>
+<span class="co">#&gt;  0.73123303  0.00000000  0.00000000  0.00000000  0.00000000  0.00000000 </span>
 <span class="co">#&gt;         V12         V13         V14         V15         V16         V17 </span>
-<span class="co">#&gt;  0.00000000  0.00000000  0.00000000  0.92340689  0.00000000  0.00000000 </span>
+<span class="co">#&gt;  0.00000000  0.00000000  0.00000000  0.92339627  0.00000000  0.00000000 </span>
 <span class="co">#&gt;         V18         V19         V20 </span>
-<span class="co">#&gt;  0.00000000  0.00000000  0.92553573</span>
+<span class="co">#&gt;  0.00000000  0.00000000  0.92557401</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cv.fit</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-example2-1.png" width="100%"></p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/glmtlp.html">glmtlp</a></span><span class="op">(</span><span class="va">gau_data</span><span class="op">$</span><span class="va">X</span>, <span class="va">gau_data</span><span class="op">$</span><span class="va">y</span>, family <span class="op">=</span> <span class="st">"gaussian"</span>, penalty <span class="op">=</span> <span class="st">"l0"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">fit</span>, kappa <span class="op">=</span> <span class="va">cv.fit</span><span class="op">$</span><span class="va">kappa.min</span><span class="op">)</span>
+<span class="co">#&gt;   intercept          V1          V2          V3          V4          V5 </span>
+<span class="co">#&gt; -0.08612345  0.85744201  0.00000000  0.00000000  0.00000000  0.00000000 </span>
+<span class="co">#&gt;          V6          V7          V8          V9         V10         V11 </span>
+<span class="co">#&gt;  0.73126609  0.00000000  0.00000000  0.00000000  0.00000000  0.00000000 </span>
+<span class="co">#&gt;         V12         V13         V14         V15         V16         V17 </span>
+<span class="co">#&gt;  0.00000000  0.00000000  0.00000000  0.92340833  0.00000000  0.00000000 </span>
+<span class="co">#&gt;         V18         V19         V20 </span>
+<span class="co">#&gt;  0.00000000  0.00000000  0.92553304</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">fit</span>, X <span class="op">=</span> <span class="va">gau_data</span><span class="op">$</span><span class="va">X</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="op">]</span>, kappa <span class="op">=</span> <span class="va">cv.fit</span><span class="op">$</span><span class="va">kappa.min</span><span class="op">)</span>
+<span class="co">#&gt; [1] -1.27653238 -0.07749687 -0.96454326 -1.61842184  1.30294674</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">fit</span>, xvar <span class="op">=</span> <span class="st">"kappa"</span>, label <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<p><img src="reference/figures/README-example2-2.png" width="100%"></p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"bin_data"</span><span class="op">)</span>
 <span class="va">cv.fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/cv.glmtlp.html">cv.glmtlp</a></span><span class="op">(</span><span class="va">bin_data</span><span class="op">$</span><span class="va">X</span>, <span class="va">bin_data</span><span class="op">$</span><span class="va">y</span>, family <span class="op">=</span> <span class="st">"binomial"</span>, penalty <span class="op">=</span> <span class="st">"l1"</span>, ncores<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">cv.fit</span><span class="op">)</span>
 <span class="co">#&gt;   intercept          V1          V2          V3          V4          V5 </span>
-<span class="co">#&gt; -0.12906933  0.30481693  0.00000000  0.00000000  0.00000000 -0.33522378 </span>
+<span class="co">#&gt; -0.13851097  0.27147279  0.00000000  0.00000000  0.00000000 -0.31545484 </span>
 <span class="co">#&gt;          V6          V7          V8          V9         V10         V11 </span>
-<span class="co">#&gt;  0.48272656 -0.52613795  0.00000000  0.25935963  0.12429385  0.04212470 </span>
+<span class="co">#&gt;  0.46258448 -0.49974658  0.00000000  0.25325831  0.10591942  0.02481680 </span>
 <span class="co">#&gt;         V12         V13         V14         V15         V16         V17 </span>
-<span class="co">#&gt;  0.00000000 -0.16147507  0.07527975  0.40731409  0.00000000  0.04078650 </span>
+<span class="co">#&gt;  0.00000000 -0.14310099  0.05090976  0.38578907  0.00000000  0.02754424 </span>
 <span class="co">#&gt;         V18         V19         V20 </span>
-<span class="co">#&gt;  0.00000000  0.07057177  0.65833815</span>
+<span class="co">#&gt;  0.00000000  0.06289112  0.63889293</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cv.fit</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-example3-1.png" width="100%"></p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/glmtlp.html">glmtlp</a></span><span class="op">(</span><span class="va">bin_data</span><span class="op">$</span><span class="va">X</span>, <span class="va">bin_data</span><span class="op">$</span><span class="va">y</span>, family <span class="op">=</span> <span class="st">"binomial"</span>, penalty <span class="op">=</span> <span class="st">"l1"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">fit</span>, lambda <span class="op">=</span> <span class="va">cv.fit</span><span class="op">$</span><span class="va">lambda.min</span><span class="op">)</span>
+<span class="co">#&gt;   intercept          V1          V2          V3          V4          V5 </span>
+<span class="co">#&gt; -0.13851140  0.27148538  0.00000000  0.00000000  0.00000000 -0.31545724 </span>
+<span class="co">#&gt;          V6          V7          V8          V9         V10         V11 </span>
+<span class="co">#&gt;  0.46257686 -0.49974985  0.00000000  0.25324957  0.10592135  0.02481048 </span>
+<span class="co">#&gt;         V12         V13         V14         V15         V16         V17 </span>
+<span class="co">#&gt;  0.00000000 -0.14310223  0.05089196  0.38578606  0.00000000  0.02754008 </span>
+<span class="co">#&gt;         V18         V19         V20 </span>
+<span class="co">#&gt;  0.00000000  0.06289556  0.63889414</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">fit</span>, X <span class="op">=</span> <span class="va">bin_data</span><span class="op">$</span><span class="va">X</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="op">]</span>, type <span class="op">=</span> <span class="st">"response"</span>, lambda <span class="op">=</span> <span class="va">cv.fit</span><span class="op">$</span><span class="va">lambda.min</span><span class="op">)</span>
+<span class="co">#&gt; [1] 0.4314030 0.3733417 0.3372594 0.3884085 0.4366392</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">fit</span>, xvar <span class="op">=</span> <span class="st">"lambda"</span>, label <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<p><img src="reference/figures/README-example3-2.png" width="100%"></p>
 </div>
 <div id="references" class="section level2">
 <h2 class="hasAnchor">
