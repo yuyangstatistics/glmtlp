@@ -70,7 +70,7 @@
 </h1>
                         <h4 class="author">Chunlin Li, Yu Yang, Chong Wu</h4>
             
-            <h4 class="date">October 14, 2021</h4>
+            <h4 class="date">October 17, 2021</h4>
       
       
       <div class="hidden name"><code>glmtlp.Rmd</code></div>
@@ -117,19 +117,19 @@
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">fit</span>, xvar <span class="op">=</span> <span class="st">"lambda"</span><span class="op">)</span></code></pre></div>
 <p><img src="glmtlp_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
-<p>The output is a <code>ggplot</code> object. Therefore, the users are allowed to make further modifications on the plot to suit their own needs. The plot shows the solution path of the model, with each curve correpsponding to a variable. Users may also choose to annotate the curves by setting <code>label=TRUE</code>. Note that for “l1” or “tlp” penalty, <code>xvar</code> could be chosen from c(“lambda”, “log_lambda”, “deviance”, “l1_norm”), and for “l0” penalty, <code>xvar</code> could be chosen from c(“kappa”, “log_kappa”).</p>
+<p>The output is a <code>ggplot</code> object. Therefore, the users are allowed to make further modifications on the plot to suit their own needs. The plot shows the solution path of the model, with each curve corresponding to a variable. Users may also choose to annotate the curves by setting <code>label=TRUE</code>. Note that for “l1” or “tlp” penalty, <code>xvar</code> could be chosen from c(“lambda”, “log_lambda”, “deviance”, “l1_norm”), and for “l0” penalty, <code>xvar</code> could be chosen from c(“kappa”, “log_kappa”).</p>
 <p>We can use the <code>coef</code> function to obtain the fitted coefficients. By default, the results would be a matrix, with each column representing the coefficients for every <span class="math inline">\(\lambda\)</span> or <span class="math inline">\(\kappa\)</span>. The users may also choose to input the desired value of <span class="math inline">\(\lambda\)</span> or <span class="math inline">\(\kappa\)</span></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></code></pre></div>
 <pre><code>...
 ##             0.951497   0.866968    0.789949    0.719772    0.655830   0.597568
-## intercept -0.4014902 -0.2241503 -0.22950375 -0.19900498 -0.01462595 -0.0146239
-## V1         0.0000000  0.0000000  0.00000000  0.85226658  0.99415778  0.9941723
+## intercept -0.4014902 -0.2241503 -0.22950171 -0.19900920 -0.01462016 -0.0146205
+## V1         0.0000000  0.0000000  0.00000000  0.85226512  0.99419320  0.9941700
 ## V2         0.0000000  0.0000000  0.00000000  0.00000000  0.00000000  0.0000000
 ## V3         0.0000000  0.0000000  0.00000000  0.00000000  0.00000000  0.0000000
 ## V4         0.0000000  0.0000000  0.00000000  0.00000000  0.00000000  0.0000000
 ## V5         0.0000000  0.0000000  0.00000000  0.00000000  0.00000000  0.0000000
-## V6         0.0000000  0.0000000  0.00000000  0.03008508  0.89827193  0.8982763
+## V6         0.0000000  0.0000000  0.00000000  0.03008263  0.89831042  0.8982887
 ## V7         0.0000000  0.0000000  0.00000000  0.00000000  0.00000000  0.0000000
 ## V8         0.0000000  0.0000000  0.00000000  0.00000000  0.00000000  0.0000000
 ...</code></pre>
@@ -137,34 +137,34 @@
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">fit</span>, lambda <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></code></pre></div>
 <pre><code>...
 ##    intercept           V1           V2           V3           V4           V5 
-##  0.007497792  0.998200585  0.000000000  0.177564607  0.217621974  0.000000000 
+##  0.007499312  0.998203658  0.000000000  0.177562410  0.217622545  0.000000000 
 ##           V6           V7           V8           V9          V10          V11 
-##  0.867568040  0.000000000 -0.033090032  0.160495654  0.830144026  0.000000000 
+##  0.867568213  0.000000000 -0.033092168  0.160498944  0.830140945  0.000000000 
 ##          V12          V13          V14          V15          V16          V17 
-##  0.000000000  0.000000000  0.000000000  0.931829201  0.000000000  0.000000000 
+##  0.000000000  0.000000000  0.000000000  0.931824341  0.000000000  0.000000000 
 ##          V18          V19          V20 
-## -0.002742862  0.000000000  0.849239969
+## -0.002743622  0.000000000  0.849239581
 NA
 NA
 ...</code></pre>
 <p>In terms of prediction, the users need to input a design matrix and the type, as well as the desired level of regularization parameters.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">fit</span>, <span class="va">X</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="op">]</span>, lambda <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] -1.5747745  0.3901312  0.1573209 -0.6070172  2.3966568</code></pre>
-<p>Cross-validation can be implemented by <code>cv.glmtlp</code> to find the best regularization paramter.</p>
+<pre><code>## [1] -1.5747634  0.3901266  0.1573180 -0.6070092  2.3966536</code></pre>
+<p>Cross-validation can be implemented by <code>cv.glmtlp</code> to find the best regularization parameter.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cv.fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/cv.glmtlp.html">cv.glmtlp</a></span><span class="op">(</span><span class="va">X</span>, <span class="va">y</span>, family <span class="op">=</span> <span class="st">"gaussian"</span>, penalty <span class="op">=</span> <span class="st">"tlp"</span><span class="op">)</span></code></pre></div>
-<p><code>cv.glmtlp</code> returns a <code>cv.glmtlp</code> object, a list with all the ingredients of the cross-validated fit. Users may use <code>coef</code>, <code>predict</code>, and <code>plot</code> to further check the cross-valiation results.</p>
+<p><code>cv.glmtlp</code> returns a <code>cv.glmtlp</code> object, a list with all the ingredients of the cross-validated fit. Users may use <code>coef</code>, <code>predict</code>, and <code>plot</code> to further check the cross-validation results.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">cv.fit</span><span class="op">)</span></code></pre></div>
 <pre><code>##   intercept          V1          V2          V3          V4          V5 
-## -0.01461576  0.99420610  0.00000000  0.00000000  0.00000000  0.00000000 
+## -0.01462009  0.99417077  0.00000000  0.00000000  0.00000000  0.00000000 
 ##          V6          V7          V8          V9         V10         V11 
-##  0.89831489  0.00000000  0.00000000  0.00000000  0.86096676  0.00000000 
+##  0.89830785  0.00000000  0.00000000  0.00000000  0.86093073  0.00000000 
 ##         V12         V13         V14         V15         V16         V17 
-##  0.00000000  0.00000000  0.00000000  0.97499800  0.00000000  0.00000000 
+##  0.00000000  0.00000000  0.00000000  0.97497946  0.00000000  0.00000000 
 ##         V18         V19         V20 
-##  0.00000000  0.00000000  0.88057073</code></pre>
+##  0.00000000  0.00000000  0.88058134</code></pre>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cv.fit</span><span class="op">)</span></code></pre></div>
 <p><img src="glmtlp_files/figure-html/unnamed-chunk-11-1.png" width="700"></p>
@@ -174,7 +174,7 @@ NA
 <h2 class="hasAnchor">
 <a href="#references" class="anchor"></a>References</h2>
 <p>Shen, Xiaotong, Wei Pan, and Yunzhang Zhu. “Likelihood-based selection and sharp parameter estimation.” <em>Journal of the American Statistical Association</em> 107.497 (2012): 223-232. <a href="https://doi.org/10.1080/01621459.2011.645783" class="uri">https://doi.org/10.1080/01621459.2011.645783</a>.</p>
-<p>Tibshirani, Robert, et al. “Strong rules for discarding predictors in lasso‐type problems.” <em>Journal of the Royal Statistical Society: Series B (Statistical Methodology)</em> 74.2 (2012): 245-266. <a href="https://doi.org/10.1111/j.1467-9868.2011.01004.x" class="uri">https://doi.org/10.1111/j.1467-9868.2011.01004.x</a>.</p>
+<p>Tibshirani, Robert, et al. “Strong rules for discarding predictors in lasso-type problems.” <em>Journal of the Royal Statistical Society: Series B (Statistical Methodology)</em> 74.2 (2012): 245-266. <a href="https://doi.org/10.1111/j.1467-9868.2011.01004.x" class="uri">https://doi.org/10.1111/j.1467-9868.2011.01004.x</a>.</p>
 <p>Yang, Yi, and Hui Zou. “A coordinate majorization descent algorithm for l1 penalized learning.” <em>Journal of Statistical Computation and Simulation</em> 84.1 (2014): 84-95. <a href="https://doi.org/10.1080/00949655.2012.695374" class="uri">https://doi.org/10.1080/00949655.2012.695374</a>.</p>
 </div>
   </div>

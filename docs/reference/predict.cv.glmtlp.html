@@ -161,7 +161,7 @@ models, results are returned only for the class corresponding to the second
 level of the factor response. Type <code>"class"</code> applies only to 
 <code>"binomial"</code> models, and produces the class 
 label corresponding to the maximum probability. Type <code>"numnz"</code> returns the 
-total number of nonzeros coefficients for each value of <code>lambda</code> or 
+total number of non-zeros coefficients for each value of <code>lambda</code> or 
 <code>kappa</code>. Type <code>"varnz"</code> returns 
 a list of the indices of the nonzero coefficients for each value of 
 <code>lambda</code> or <code>kappa</code>.</p></td>
@@ -204,7 +204,7 @@ a prediction.</p>
   <br /> Yang, Y., &amp; Zou, H. (2014). <em>A coordinate majorization descent algorithm 
   for l1 penalized learning. Journal of Statistical Computation and 
   Simulation, 84(1), 84-95.</em>
-  <br /> Two R packge Github: <em>ncvreg</em> and <em>glmnet</em>.</p>
+  <br /> Two R package Github: <em>ncvreg</em> and <em>glmnet</em>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code>print</code>, <code>predict</code>, <code>coef</code> and <code>plot</code> methods,
@@ -217,18 +217,18 @@ and the <code>cv.glmtlp</code> function.</p></div>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='va'>X</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>100</span> <span class='op'>*</span> <span class='fl'>20</span><span class='op'>)</span>, <span class='fl'>100</span>, <span class='fl'>20</span><span class='op'>)</span>
 <span class='va'>y</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>100</span><span class='op'>)</span>
-<span class='va'>cv.fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='cv.glmtlp.html'>cv.glmtlp</a></span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>y</span>, family <span class='op'>=</span> <span class='st'>"gaussian"</span>, penalty <span class='op'>=</span> <span class='st'>"l1"</span>, ncores<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span>
+<span class='va'>cv.fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='cv.glmtlp.html'>cv.glmtlp</a></span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>y</span>, family <span class='op'>=</span> <span class='st'>"gaussian"</span>, penalty <span class='op'>=</span> <span class='st'>"l1"</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>cv.fit</span>, X <span class='op'>=</span> <span class='va'>X</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>, <span class='op'>]</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] -0.03857829  0.20724712  0.17144116  0.11711436  0.12029950</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span><span class='op'>(</span><span class='va'>cv.fit</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] -0.03861472  0.20722139  0.17142453  0.11708130  0.12029364</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span><span class='op'>(</span><span class='va'>cv.fit</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;   intercept          V1          V2          V3          V4          V5 
-#&gt;  0.08881178  0.00000000  0.00000000  0.00000000  0.00000000  0.00000000 
+#&gt;  0.08880861  0.00000000  0.00000000  0.00000000  0.00000000  0.00000000 
 #&gt;          V6          V7          V8          V9         V10         V11 
-#&gt;  0.00000000  0.00000000  0.00000000  0.00000000 -0.13996334  0.00000000 
+#&gt;  0.00000000  0.00000000  0.00000000  0.00000000 -0.13993547  0.00000000 
 #&gt;         V12         V13         V14         V15         V16         V17 
-#&gt;  0.00000000  0.00000000  0.00000000  0.00000000  0.00000000 -0.03040976 
+#&gt;  0.00000000  0.00000000  0.00000000  0.00000000  0.00000000 -0.03043163 
 #&gt;         V18         V19         V20 
 #&gt;  0.00000000  0.00000000  0.00000000 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>cv.fit</span>, X <span class='op'>=</span> <span class='va'>X</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>, <span class='op'>]</span>, lambda <span class='op'>=</span> <span class='fl'>0.1</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] -0.1825646  0.2703295  0.2246937  0.1082694  0.1360871</div><div class='input'>
+</div><div class='output co'>#&gt; [1] -0.1826316  0.2702681  0.2246775  0.1082916  0.1361339</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
