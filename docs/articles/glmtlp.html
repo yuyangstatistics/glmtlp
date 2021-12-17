@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">glmtlp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.1</span>
       </span>
     </div>
 
@@ -63,14 +63,14 @@
 
       
 
-      </header><script src="glmtlp_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="glmtlp_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>A introduction to <code>glmtlp</code>
 </h1>
                         <h4 class="author">Chunlin Li, Yu Yang, Chong Wu</h4>
             
-            <h4 class="date">October 17, 2021</h4>
+            <h4 class="date">December 17, 2021</h4>
       
       
       <div class="hidden name"><code>glmtlp.Rmd</code></div>
@@ -82,9 +82,9 @@
 <div id="introduction" class="section level2">
 <h2 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h2>
-<p>Glmtlp is a package that fits generalized linear models via penalized maximum likelihood. The regularization path is computed for the l0, l1, and TLP penalty at a grid of values (on the log scale) for the regularization parameter lambda or kappa (for l0 penalty). The algorithm is extremely fast. It fits linear and logistic regression models. The package includes methods for prediction and plotting, and functions for cross-validation.</p>
-<p>The authors of glmtlp are Chunlin Li, Yu Yang, and Chong Wu, and the R package is maintained by Chunlin Li and Yu Yang. A Python version is under development.</p>
-<p>This vignette describes basic usage of glmtlp in R.</p>
+<p><code>glmtlp</code> fits generalized linear models via penalized maximum likelihood. It currently supports linear and logistic regression models. The regularization path is computed for the l0, l1, and TLP penalty at a grid of values for the regularization parameter lambda <span class="math inline">\(\lambda\)</span> (for l1 and TLP penalty) or kappa <span class="math inline">\(\kappa\)</span> (for l0 penalty). In addition, the package provides methods for prediction and plotting, and functions for cross-validation.</p>
+<p>The authors of <code>glmtlp</code> are Chunlin Li, Yu Yang, and Chong Wu, and the R package is maintained by Chunlin Li and Yu Yang. A Python version is under development.</p>
+<p>This vignette describes basic usage of <code>glmtlp</code> in R.</p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
@@ -96,85 +96,89 @@
 <div id="quick-start" class="section level2">
 <h2 class="hasAnchor">
 <a href="#quick-start" class="anchor"></a>Quick Start</h2>
-<p>In this section, we will go over the main functions and outputs in the package.</p>
+<p>In this section, we go over the main functions and outputs in the package.</p>
 <p>First, we load the <code>glmtlp</code> package:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yuyangyy.com/glmtlp/">glmtlp</a></span><span class="op">)</span></code></pre></div>
-<pre><code>## Loading required package: foreach</code></pre>
-<pre><code>## Loading required package: parallel</code></pre>
-<p>We load a simulated dataset with continuous response to illustrate the usage of gaussian linear regression.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<p>We load a simulated data set with continuous response to illustrate the usage of linear regression.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">gau_data</span><span class="op">)</span>
 <span class="va">X</span> <span class="op">&lt;-</span> <span class="va">gau_data</span><span class="op">$</span><span class="va">X</span>
 <span class="va">y</span> <span class="op">&lt;-</span> <span class="va">gau_data</span><span class="op">$</span><span class="va">y</span></code></pre></div>
-<p>We fit three models by calling <code>glmtlp</code> with <code>X</code>, <code>y</code>, <code>family="gaussian"</code> and three different <code>penalty</code>.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<p>We fit three models by calling <code>glmtlp</code> with <code>X</code>, <code>y</code>, <code>family="gaussian"</code> and three different <code>penalty</code>. The returned <code>fit</code> is an object of class <code>glmtlp</code> that contains all relevant information of the fitted model for further use. Users can apply <code>plot</code>, <code>coef</code> and <code>predict</code> methods to the fitted objects to get more detailed results.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/glmtlp.html">glmtlp</a></span><span class="op">(</span><span class="va">X</span>, <span class="va">y</span>, family <span class="op">=</span> <span class="st">"gaussian"</span>, penalty <span class="op">=</span> <span class="st">"tlp"</span><span class="op">)</span>
 <span class="va">fit2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/glmtlp.html">glmtlp</a></span><span class="op">(</span><span class="va">X</span>, <span class="va">y</span>, family <span class="op">=</span> <span class="st">"gaussian"</span>, penalty <span class="op">=</span> <span class="st">"l0"</span><span class="op">)</span>
 <span class="va">fit3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/glmtlp.html">glmtlp</a></span><span class="op">(</span><span class="va">X</span>, <span class="va">y</span>, family <span class="op">=</span> <span class="st">"gaussian"</span>, penalty <span class="op">=</span> <span class="st">"l1"</span><span class="op">)</span></code></pre></div>
-<p><code>fit</code> is an object of class <code>glmtlp</code> that contains all the relevant information of the fitted model for further use. Users can apply <code>plot</code>, <code>coef</code> and <code>predict</code> to the fitted objects to get detailed results.</p>
-<p>We can visualize the coefficients by executing the <code>plot</code> method:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<p>We can visualize the coefficients and the solution path by executing the <code>plot</code> method. The output is a <code>ggplot</code> object. Therefore, the users are allowed to customize the plot to suit their own needs. The plot shows the solution path of the model, with each curve corresponding to a variable. Users may also choose to annotate the curves by setting <code>label=TRUE</code>. <code>xvar</code> is the index variable to plot against. Note that for “l1” or “tlp” penalty, <code>xvar</code> could be chosen from <code><a href="https://rdrr.io/r/base/c.html">c("lambda", "log_lambda", "deviance", "l1_norm")</a></code>, and for “l0” penalty, <code>xvar</code> could be chosen as <code>"kappa"</code>.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">fit</span>, xvar <span class="op">=</span> <span class="st">"lambda"</span><span class="op">)</span></code></pre></div>
 <p><img src="glmtlp_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
-<p>The output is a <code>ggplot</code> object. Therefore, the users are allowed to make further modifications on the plot to suit their own needs. The plot shows the solution path of the model, with each curve corresponding to a variable. Users may also choose to annotate the curves by setting <code>label=TRUE</code>. Note that for “l1” or “tlp” penalty, <code>xvar</code> could be chosen from c(“lambda”, “log_lambda”, “deviance”, “l1_norm”), and for “l0” penalty, <code>xvar</code> could be chosen from c(“kappa”, “log_kappa”).</p>
-<p>We can use the <code>coef</code> function to obtain the fitted coefficients. By default, the results would be a matrix, with each column representing the coefficients for every <span class="math inline">\(\lambda\)</span> or <span class="math inline">\(\kappa\)</span>. The users may also choose to input the desired value of <span class="math inline">\(\lambda\)</span> or <span class="math inline">\(\kappa\)</span></p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<p>We can use the <code>coef</code> function to obtain the fitted coefficients. By default, the results would be a matrix, with each column representing the coefficients for every <span class="math inline">\(\lambda\)</span> or <span class="math inline">\(\kappa\)</span>. The users may also choose to input the desired value of <span class="math inline">\(\lambda\)</span> or <span class="math inline">\(\kappa\)</span>. Note that the user-supplied <span class="math inline">\(\lambda\)</span> or <span class="math inline">\(\kappa\)</span> parameter should be in the range of the parameter sequence used in the fitted model.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></code></pre></div>
 <pre><code>...
-##             0.951497   0.866968    0.789949    0.719772    0.655830   0.597568
-## intercept -0.4014902 -0.2241503 -0.22950171 -0.19900920 -0.01462016 -0.0146205
-## V1         0.0000000  0.0000000  0.00000000  0.85226512  0.99419320  0.9941700
-## V2         0.0000000  0.0000000  0.00000000  0.00000000  0.00000000  0.0000000
-## V3         0.0000000  0.0000000  0.00000000  0.00000000  0.00000000  0.0000000
-## V4         0.0000000  0.0000000  0.00000000  0.00000000  0.00000000  0.0000000
-## V5         0.0000000  0.0000000  0.00000000  0.00000000  0.00000000  0.0000000
-## V6         0.0000000  0.0000000  0.00000000  0.03008263  0.89831042  0.8982887
-## V7         0.0000000  0.0000000  0.00000000  0.00000000  0.00000000  0.0000000
-## V8         0.0000000  0.0000000  0.00000000  0.00000000  0.00000000  0.0000000
+##              1.32501    1.23571    1.15242     1.07475     1.00232     0.93477
+## intercept -0.2428484 -0.1352757 -0.0235558 -0.02355059 -0.05190855 -0.05192106
+## V1         0.0000000  1.2224980  1.2400538  1.24005913  1.27181076  1.27178077
+## V2         0.0000000  0.0000000  0.0000000  0.00000000  0.00000000  0.00000000
+## V3         0.0000000  0.0000000  0.0000000  0.00000000  0.00000000  0.00000000
+## V4         0.0000000  0.0000000  0.0000000  0.00000000  0.00000000  0.00000000
+## V5         0.0000000  0.0000000  0.0000000  0.00000000  0.00000000  0.00000000
+## V6         0.0000000  0.0000000  0.0000000  0.00000000  0.93236905  0.93231995
+## V7         0.0000000  0.0000000  0.0000000  0.00000000  0.00000000  0.00000000
+## V8         0.0000000  0.0000000  0.0000000  0.00000000  0.00000000  0.00000000
 ...</code></pre>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">fit</span>, lambda <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></code></pre></div>
 <pre><code>...
-##    intercept           V1           V2           V3           V4           V5 
-##  0.007499312  0.998203658  0.000000000  0.177562410  0.217622545  0.000000000 
-##           V6           V7           V8           V9          V10          V11 
-##  0.867568213  0.000000000 -0.033092168  0.160498944  0.830140945  0.000000000 
-##          V12          V13          V14          V15          V16          V17 
-##  0.000000000  0.000000000  0.000000000  0.931824341  0.000000000  0.000000000 
-##          V18          V19          V20 
-## -0.002743622  0.000000000  0.849239581
+##   intercept          V1          V2          V3          V4          V5 
+##  0.03012329  1.25295108  0.00000000 -0.18639467 -0.15726983 -0.19310409 
+##          V6          V7          V8          V9         V10         V11 
+##  0.91543631  0.00000000  0.01275199  0.00000000  0.70521331  0.19432176 
+##         V12         V13         V14         V15         V16         V17 
+##  0.01640360  0.00000000  0.17320713  1.16204702  0.00000000  0.00000000 
+##         V18         V19         V20 
+##  0.00000000 -0.19471461  0.94229082
 NA
 NA
 ...</code></pre>
-<p>In terms of prediction, the users need to input a design matrix and the type, as well as the desired level of regularization parameters.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<p>In addition, we can make predictions by applying the <code>predict</code> method. For this, users need to input a design matrix and the type of prediction to be made. Also, users can provide the desired level of regularization parameters or the indices of the parameter sequence. If neither is provided, then the prediction will be made for the whole lambda or kappa sequence.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">fit</span>, <span class="va">X</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="op">]</span>, lambda <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] -1.5747634  0.3901266  0.1573180 -0.6070092  2.3966536</code></pre>
-<p>Cross-validation can be implemented by <code>cv.glmtlp</code> to find the best regularization parameter.</p>
+<pre><code>## [1]  0.09972438  2.66195238 -1.33516956  0.33721013 -2.63615326</code></pre>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">fit</span>, <span class="va">X</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="op">]</span>, which <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="co"># the 10th lambda in the lambda sequence</span></code></pre></div>
+<pre><code>## [1]  0.1906092  2.2279251 -1.4255474  0.9313526 -2.8151620</code></pre>
+<p>Cross-validation can be implemented by <code>cv.glmtlp</code> to find the best regularization parameter. <code>cv.glmtlp</code> returns a <code>cv.glmtlp</code> object, a list with all the ingredients of the cross-validated fit. Users may use <code>coef</code>, <code>predict</code>, and <code>plot</code> to further check the cross-validation results.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cv.fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/cv.glmtlp.html">cv.glmtlp</a></span><span class="op">(</span><span class="va">X</span>, <span class="va">y</span>, family <span class="op">=</span> <span class="st">"gaussian"</span>, penalty <span class="op">=</span> <span class="st">"tlp"</span><span class="op">)</span></code></pre></div>
-<p><code>cv.glmtlp</code> returns a <code>cv.glmtlp</code> object, a list with all the ingredients of the cross-validated fit. Users may use <code>coef</code>, <code>predict</code>, and <code>plot</code> to further check the cross-validation results.</p>
+<p>The <code>plot</code> method will plot the deviance against the parameter sequence. The vertical dashed line shows the position of the index where the smallest CV error is achieved, and users may also choose to omit it by setting <code>vertical.line = FALSE</code>. Again, the output is a <code>ggplot</code> object, so users are free to make modifications to it.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">cv.fit</span><span class="op">)</span></code></pre></div>
-<pre><code>##   intercept          V1          V2          V3          V4          V5 
-## -0.01462009  0.99417077  0.00000000  0.00000000  0.00000000  0.00000000 
-##          V6          V7          V8          V9         V10         V11 
-##  0.89830785  0.00000000  0.00000000  0.00000000  0.86093073  0.00000000 
-##         V12         V13         V14         V15         V16         V17 
-##  0.00000000  0.00000000  0.00000000  0.97497946  0.00000000  0.00000000 
-##         V18         V19         V20 
-##  0.00000000  0.00000000  0.88058134</code></pre>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cv.fit</span><span class="op">)</span></code></pre></div>
-<p><img src="glmtlp_files/figure-html/unnamed-chunk-11-1.png" width="700"></p>
-<p>This plot is a <code>ggplot</code> object and the users are allowed to make further modifications on it.</p>
+<p><img src="glmtlp_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
+<p>The <code>coef</code> and <code>predict</code> method by default use the parameter that gives the smallest CV error, namely, <code>which = cv.fit$idx.min</code>.</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">cv.fit</span><span class="op">)</span></code></pre></div>
+<pre><code>##    intercept           V1           V2           V3           V4           V5 
+## -0.009699475  1.240189087  0.000000000  0.000000000  0.000000000  0.000000000 
+##           V6           V7           V8           V9          V10          V11 
+##  0.883153618  0.000000000  0.000000000  0.000000000  0.725706606  0.000000000 
+##          V12          V13          V14          V15          V16          V17 
+##  0.000000000  0.000000000  0.000000000  1.125974039  0.000000000  0.000000000 
+##          V18          V19          V20 
+##  0.000000000  0.000000000  0.981385102</code></pre>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">cv.fit</span>, <span class="va">X</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="op">]</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1]  0.1906017  2.2279118 -1.4255325  0.9313408 -2.8151384</code></pre>
 </div>
 <div id="references" class="section level2">
 <h2 class="hasAnchor">
 <a href="#references" class="anchor"></a>References</h2>
-<p>Shen, Xiaotong, Wei Pan, and Yunzhang Zhu. “Likelihood-based selection and sharp parameter estimation.” <em>Journal of the American Statistical Association</em> 107.497 (2012): 223-232. <a href="https://doi.org/10.1080/01621459.2011.645783" class="uri">https://doi.org/10.1080/01621459.2011.645783</a>.</p>
-<p>Tibshirani, Robert, et al. “Strong rules for discarding predictors in lasso-type problems.” <em>Journal of the Royal Statistical Society: Series B (Statistical Methodology)</em> 74.2 (2012): 245-266. <a href="https://doi.org/10.1111/j.1467-9868.2011.01004.x" class="uri">https://doi.org/10.1111/j.1467-9868.2011.01004.x</a>.</p>
+<p>Shen, X., Pan, W., &amp; Zhu, Y. (2012). Likelihood-based selection and sharp parameter estimation. <em>Journal of the American Statistical Association</em>, 107(497), 223-232. <a href="https://doi.org/10.1080/01621459.2011.645783" class="uri">https://doi.org/10.1080/01621459.2011.645783</a>.</p>
+<p>Shen, X., Pan, W., Zhu, Y., &amp; Zhou, H. (2013). On constrained and regularized high-dimensional regression. <em>Annals of the Institute of Statistical Mathematics</em>, 65(5), 807-832. <a href="https://doi.org/10.1007/s10463-012-0396-3" class="uri">https://doi.org/10.1007/s10463-012-0396-3</a></p>
+<p>Li, C., Shen, X., &amp; Pan, W. (2021). Inference for a Large Directed Graphical Model with Interventions. <em>arXiv preprint</em> arXiv:2110.03805. <a href="https://arxiv.org/abs/2110.03805" class="uri">https://arxiv.org/abs/2110.03805</a></p>
+<p>Tibshirani, R., Bien, J., Friedman, J., Hastie, T., Simon, N., Taylor, J., &amp; Tibshirani, R. J. (2012). Strong rules for discarding predictors in lasso‐type problems. <em>Journal of the Royal Statistical Society: Series B (Statistical Methodology)</em>, 74(2), 245-266. <a href="https://doi.org/10.1111/j.1467-9868.2011.01004.x" class="uri">https://doi.org/10.1111/j.1467-9868.2011.01004.x</a>.</p>
 <p>Yang, Yi, and Hui Zou. “A coordinate majorization descent algorithm for l1 penalized learning.” <em>Journal of Statistical Computation and Simulation</em> 84.1 (2014): 84-95. <a href="https://doi.org/10.1080/00949655.2012.695374" class="uri">https://doi.org/10.1080/00949655.2012.695374</a>.</p>
 </div>
   </div>

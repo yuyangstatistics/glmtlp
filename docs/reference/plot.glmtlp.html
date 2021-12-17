@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>plot solution path from a "glmtlp" object. — plot.glmtlp • glmtlp</title>
+<title>Plot Method for a "glmtlp" Object — plot.glmtlp • glmtlp</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="plot solution path from a "glmtlp" object. — plot.glmtlp" />
-<meta property="og:description" content="this function generates a solution path plot from a fitted &quot;glmtlp&quot; object." />
+<meta property="og:title" content="Plot Method for a "glmtlp" Object — plot.glmtlp" />
+<meta property="og:description" content="Generates a solution path plot for a fitted &quot;glmtlp&quot; object." />
 
 
 
@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">glmtlp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.1</span>
       </span>
     </div>
 
@@ -109,19 +109,19 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>plot solution path from a "glmtlp" object.</h1>
+    <h1>Plot Method for a "glmtlp" Object</h1>
     
     <div class="hidden name"><code>plot.glmtlp.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>this function generates a solution path plot from a fitted <code>"glmtlp"</code> object.</p>
+    <p>Generates a solution path plot for a fitted <code>"glmtlp"</code> object.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for glmtlp</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span>
   <span class='va'>x</span>,
-  xvar <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"lambda"</span>, <span class='st'>"kappa"</span>, <span class='st'>"deviance"</span>, <span class='st'>"l1_norm"</span>, <span class='st'>"log_lambda"</span>, <span class='st'>"log_kappa"</span><span class='op'>)</span>,
+  xvar <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"lambda"</span>, <span class='st'>"kappa"</span>, <span class='st'>"deviance"</span>, <span class='st'>"l1_norm"</span>, <span class='st'>"log_lambda"</span><span class='op'>)</span>,
   xlab <span class='op'>=</span> <span class='va'>iname</span>,
   ylab <span class='op'>=</span> <span class='st'>"Coefficients"</span>,
   title <span class='op'>=</span> <span class='st'>"Solution Path"</span>,
@@ -135,34 +135,35 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>Fitted <code>"glmtlp"</code> model object.</p></td>
+      <td><p>Fitted <code>glmtlp</code> object.</p></td>
     </tr>
     <tr>
       <th>xvar</th>
-      <td><p>the x-axis variable to plot against, including <code>"lambda"</code>, 
+      <td><p>The x-axis variable to plot against, including <code>"lambda"</code>, 
 <code>"kappa"</code>, <code>"deviance"</code>, <code>"l1_norm"</code>, and <code>"log_lambda"</code>.</p></td>
     </tr>
     <tr>
       <th>xlab</th>
-      <td><p>the x-axis label of the plot, default is "Lambda", "Kappa", 
-"Fraction of Explained Deviance", "L1 Norm",  and "Log Lambda".</p></td>
+      <td><p>The x-axis label of the plot, default is <code>"Lambda"</code>, 
+<code>"Kappa"</code>, <code>"Fraction of Explained Deviance"</code>, <code>"L1 Norm"</code>, 
+and <code>"Log Lambda"</code>.</p></td>
     </tr>
     <tr>
       <th>ylab</th>
-      <td><p>the y-axis label of the plot, default is "Coefficients".</p></td>
+      <td><p>The y-axis label of the plot, default is "Coefficients".</p></td>
     </tr>
     <tr>
       <th>title</th>
-      <td><p>the main title of the plot, default is "Solution Path".</p></td>
+      <td><p>The main title of the plot, default is "Solution Path".</p></td>
     </tr>
     <tr>
       <th>label</th>
-      <td><p>logical, whether or not attach the labels for the non-zero 
-coefficients, default is FALSE.</p></td>
+      <td><p>Logical, whether or not attach the labels for the non-zero 
+coefficients, default is <code>FALSE</code>.</p></td>
     </tr>
     <tr>
       <th>label.size</th>
-      <td><p>the text size of the labels, default is 3.</p></td>
+      <td><p>The text size of the labels, default is 3.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -173,14 +174,24 @@ coefficients, default is FALSE.</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code>ggplot</code> object.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The generated plot is a <code>ggplot</code> object, and therefore, the users are able 
+  to customize the plots following the <code>ggplot2</code> syntax.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Shen, X., Pan, W., &amp; Zhu, Y. (2012). 
   <em>Likelihood-based selection and sharp parameter estimation. 
   Journal of the American Statistical Association, 107(497), 223-232.</em>
-  <br /> Yang, Y., &amp; Zou, H. (2014). <em>A coordinate majorization descent algorithm 
-  for l1 penalized learning. Journal of Statistical Computation and 
-  Simulation, 84(1), 84-95.</em>
+  <br /> Shen, X., Pan, W., Zhu, Y., &amp; Zhou, H. (2013). 
+  <em>On constrained and regularized high-dimensional regression. 
+  Annals of the Institute of Statistical Mathematics, 65(5), 807-832.</em>
+  <br /> Li, C., Shen, X., &amp; Pan, W. (2021). 
+  <em>Inference for a Large Directed Graphical Model with Interventions. 
+  arXiv preprint arXiv:2110.03805.</em>
+  <br /> Yang, Y., &amp; Zou, H. (2014). 
+  <em>A coordinate majorization descent algorithm for l1 penalized learning. 
+  Journal of Statistical Computation and Simulation, 84(1), 84-95.</em>
   <br /> Two R package Github: <em>ncvreg</em> and <em>glmnet</em>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>fit a GLM with l0, l1, or tlp regularization — glmtlp • glmtlp</title>
+<title>Fit a GLM with L0, L1, or TLP Penalization — glmtlp • glmtlp</title>
 
 
 <!-- jquery -->
@@ -39,14 +39,11 @@
 
 
 
-<meta property="og:title" content="fit a GLM with l0, l1, or tlp regularization — glmtlp" />
-<meta property="og:description" content="Fit a generalize linear model via penalized maximum likelihood. The 
-  regularization path is computed for the l0, lasso, or truncated lasso 
-  penalty at a grid of values for the regularization parameter: number of 
-  non-zeros or lambda. Can deal with all shapes of data (not large sparse 
-  data matrices now). Fits linear, logistic, multinomial, and poisson models.  
-The sequence of models implied by lambda or kappa is fit by 
-  coordinate descent.
+<meta property="og:title" content="Fit a GLM with L0, L1, or TLP Penalization — glmtlp" />
+<meta property="og:description" content="Fit generalized linear models via penalized maximum likelihood. The
+  regularization path is computed for the l0, lasso, or truncated lasso
+  penalty at a grid of values for the regularization parameter lambda
+  or kappa. Fits linear and logistic regression models.
 The package provides 3 penalties: l0, l1, and tlp and 3 distribution families: 
   gaussian, binomial, and poisson." />
 
@@ -80,7 +77,7 @@ The package provides 3 penalties: l0, l1, and tlp and 3 distribution families:
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">glmtlp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.1</span>
       </span>
     </div>
 
@@ -117,19 +114,16 @@ The package provides 3 penalties: l0, l1, and tlp and 3 distribution families:
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>fit a GLM with l0, l1, or tlp regularization</h1>
+    <h1>Fit a GLM with L0, L1, or TLP Penalization</h1>
     
     <div class="hidden name"><code>glmtlp.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Fit a generalize linear model via penalized maximum likelihood. The 
-  regularization path is computed for the l0, lasso, or truncated lasso 
-  penalty at a grid of values for the regularization parameter: number of 
-  non-zeros or lambda. Can deal with all shapes of data (not large sparse 
-  data matrices now). Fits linear, logistic, multinomial, and poisson models.</p>  
-<p>The sequence of models implied by <code>lambda</code> or <code>kappa</code> is fit by 
-  coordinate descent.</p>
+    <p>Fit generalized linear models via penalized maximum likelihood. The
+  regularization path is computed for the l0, lasso, or truncated lasso
+  penalty at a grid of values for the regularization parameter <code>lambda</code>
+  or <code>kappa</code>. Fits linear and logistic regression models.</p>
 <p>The package provides 3 penalties: l0, l1, and tlp and 3 distribution families: 
   gaussian, binomial, and poisson.</p>
     </div>
@@ -139,8 +133,8 @@ The package provides 3 penalties: l0, l1, and tlp and 3 distribution families:
   <span class='va'>y</span>,
   family <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"gaussian"</span>, <span class='st'>"binomial"</span><span class='op'>)</span>,
   penalty <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"l0"</span>, <span class='st'>"l1"</span>, <span class='st'>"tlp"</span><span class='op'>)</span>,
-  nlambda <span class='op'>=</span> <span class='fl'>100</span>,
-  lambda.min.ratio <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span><span class='op'>(</span><span class='va'>nobs</span> <span class='op'>&lt;</span> <span class='va'>nvars</span>, <span class='fl'>0.01</span>, <span class='fl'>1e-04</span><span class='op'>)</span>,
+  nlambda <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span><span class='op'>(</span><span class='va'>penalty</span> <span class='op'>==</span> <span class='st'>"l0"</span>, <span class='fl'>50</span>, <span class='fl'>100</span><span class='op'>)</span>,
+  lambda.min.ratio <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span><span class='op'>(</span><span class='va'>nobs</span> <span class='op'>&lt;</span> <span class='va'>nvars</span>, <span class='fl'>0.05</span>, <span class='fl'>0.001</span><span class='op'>)</span>,
   lambda <span class='op'>=</span> <span class='cn'>NULL</span>,
   kappa <span class='op'>=</span> <span class='cn'>NULL</span>,
   tau <span class='op'>=</span> <span class='fl'>0.3</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>sqrt</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>nvars</span><span class='op'>)</span><span class='op'>/</span><span class='va'>nobs</span><span class='op'>)</span>,
@@ -148,10 +142,10 @@ The package provides 3 penalties: l0, l1, and tlp and 3 distribution families:
   tol <span class='op'>=</span> <span class='fl'>1e-04</span>,
   weights <span class='op'>=</span> <span class='cn'>NULL</span>,
   penalty.factor <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='va'>nvars</span><span class='op'>)</span>,
-  standardize <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  standardize <span class='op'>=</span> <span class='cn'>FALSE</span>,
   dc.maxit <span class='op'>=</span> <span class='fl'>20</span>,
   cd.maxit <span class='op'>=</span> <span class='fl'>10000</span>,
-  nr.maxit <span class='op'>=</span> <span class='fl'>500</span>,
+  nr.maxit <span class='op'>=</span> <span class='fl'>20</span>,
   <span class='va'>...</span>
 <span class='op'>)</span></pre>
 
@@ -160,28 +154,26 @@ The package provides 3 penalties: l0, l1, and tlp and 3 distribution families:
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>X</th>
-      <td><p>input matrix, of dimension <code>nobs</code> x <code>nvars</code>; 
-each row is  an observation vector. Currently, doesn't support the sparse 
-matrix format (inherit from class <code>"sparseMatrix"</code> as in package 
-<code>Matrix</code>).</p></td>
+      <td><p>Input matrix, of dimension <code>nobs</code> x <code>nvars</code>;
+each row is  an observation vector.</p></td>
     </tr>
     <tr>
       <th>y</th>
-      <td><p>response variable, of length nobs. Quantitative for 
-<code>family="gaussian"</code>, or <code>family="poisson"</code> (non-negative counts). 
-For <code>family="binomial"</code>, should be either a factor with two levels. 
-For <code>family="multinomial"</code>, (to be added).</p></td>
+      <td><p>Response variable, of length <code>nobs</code>. For <code>family="gaussian"</code>,
+it should be quantitative; for <code>family="binomial"</code>, it should be either
+a factor with two levels or a binary vector.</p></td>
     </tr>
     <tr>
       <th>family</th>
-      <td><p>a character string representing one of the built-in families. 
+      <td><p>A character string representing one of the built-in families.
 See Details section below.</p></td>
     </tr>
     <tr>
       <th>penalty</th>
-      <td><p>a character string representing one of the built-in penalties. 
-"l0" represents <code>L_0</code> penalty, "l1" represents lasso-type penalty, and 
-"tlp" represents truncated lasso penalty.</p></td>
+      <td><p>A character string representing one of the built-in penalties.
+<code>"l0"</code> represents the \(L_0\) penalty, <code>"l1"</code> represents the
+lasso-type penalty (\(L_1\) penalty), and <code>"tlp"</code> represents the
+truncated lasso penalty.</p></td>
     </tr>
     <tr>
       <th>nlambda</th>
@@ -189,82 +181,77 @@ See Details section below.</p></td>
     </tr>
     <tr>
       <th>lambda.min.ratio</th>
-      <td><p>Smallest value for <code>lambda</code>, as a fraction of 
-<code>lambda.max</code>, the (data derived) entry value (i.e. the smallest value 
-for which all coefficients are zero). The default depends on the sample size 
-<code>nobs</code> relative to the number of variables <code>nvars</code>. If <code>nobs 
-&gt; nvars</code>, the default is <code>0.0001</code>, close to zero.  If <code>nobs &lt; 
-nvars</code>, the default is <code>0.01</code>.</p></td>
+      <td><p>The smallest value for <code>lambda</code>, as a fraction of
+<code>lambda.max</code>, the smallest value for which all coefficients are zero.
+The default depends on the sample size <code>nobs</code> relative to the number
+of variables <code>nvars</code>. If <code>nobs &gt; nvars</code>, the default is
+<code>0.0001</code>, and if <code>nobs &lt; nvars</code>, the default is <code>0.01</code>.</p></td>
     </tr>
     <tr>
       <th>lambda</th>
-      <td><p>A user supplied <code>lambda</code> sequence. Typical usage is to
-have the program compute its own <code>lambda</code> sequence based on 
-<code>nlambda</code> and <code>lambda.min.ratio</code>. Supplying a value of 
-<code>lambda</code> overrides this. WARNING: use with care. Avoid supplying a 
-single value for <code>lambda</code> (for predictions after CV use 
-<code><a href='https://rdrr.io/r/stats/predict.html'>predict()</a></code> instead).  Supply instead a decreasing sequence of 
-<code>lambda</code> values. <code>glmtlp</code> relies on its warms starts for speed, 
-and its often faster to fit a whole path than compute a single fit. When
-the <code>penalty</code> is 'l0', it is not recommended for the users to supply 
+      <td><p>A user-supplied <code>lambda</code> sequence. Typically, users should let
+the program compute its own <code>lambda</code> sequence based on
+<code>nlambda</code> and <code>lambda.min.ratio</code>. Supplying a value of
+<code>lambda</code> will override this. WARNING: please use this option with care.
+<code>glmtlp</code> relies on warms starts for speed, and it's often faster to
+fit a whole path than a single fit. Therefore, provide a decreasing sequence
+of <code>lambda</code> values if you want to use this option. Also, when
+<code>penalty = 'l0'</code>, it is not recommended for the users to supply
 this parameter.</p></td>
     </tr>
     <tr>
       <th>kappa</th>
-      <td><p>A user supplied <code>kappa</code> sequence. Typical usage is to
-have the program compute its own <code>kappa</code> sequence based on <code>nvars</code> 
-and <code>nobs</code>. This sequence is used when penalty is 'l0'.</p></td>
+      <td><p>A user-supplied <code>kappa</code> sequence. Typically, users should
+let the program compute its own <code>kappa</code> sequence based on <code>nvars</code>
+and <code>nobs</code>. This sequence is used when <code>penalty = 'l0'</code>.</p></td>
     </tr>
     <tr>
       <th>tau</th>
-      <td><p>A tuning parameter used in the TLP penalty. Default is 
-<code>0.3 * sqrt(log(nvars)/nobs)</code>.</p></td>
+      <td><p>A tuning parameter used in the TLP-penalized regression models.
+Default is  <code>0.3 * sqrt(log(nvars)/nobs)</code>.</p></td>
     </tr>
     <tr>
       <th>delta</th>
-      <td><p>A tuning parameter used in the coordinate majorization descent 
-algorithm. See Yang, Y., &amp; Zou, H. (2014) in the reference for detail.</p></td>
+      <td><p>A tuning parameter used in the coordinate majorization descent
+algorithm. See Yang, Y., &amp; Zou, H. (2014) in the reference for more detail.</p></td>
     </tr>
     <tr>
       <th>tol</th>
-      <td><p>Tolerance level for all the iterative optimization algorithms.</p></td>
+      <td><p>Tolerance level for all iterative optimization algorithms.</p></td>
     </tr>
     <tr>
       <th>weights</th>
-      <td><p>observation weights. Default is 1 for each observation</p></td>
+      <td><p>Observation weights. Default is 1 for each observation.</p></td>
     </tr>
     <tr>
       <th>penalty.factor</th>
-      <td><p>Separate penalty factors can be applied to each 
-coefficient. This is a number that multiplies <code>lambda</code> to allow 
-differential shrinkage. Can be 0 for some variables, which implies no 
-shrinkage, and that variable is always included in the model. Default is 1 
+      <td><p>Separate penalty factors applied to each
+coefficient, which allows for differential shrinkage. Default is 1
 for all variables.</p></td>
     </tr>
     <tr>
       <th>standardize</th>
-      <td><p>Logical. Whether or not standardize the input matrix 
+      <td><p>Logical. Whether or not standardize the input matrix
 <code>X</code>; default is <code>TRUE</code>.</p></td>
     </tr>
     <tr>
       <th>dc.maxit</th>
-      <td><p>Maximum number of iterations for the DC (Difference of 
+      <td><p>Maximum number of iterations for the DC (Difference of
 Convex Functions) programming; default is 20.</p></td>
     </tr>
     <tr>
       <th>cd.maxit</th>
-      <td><p>Maximum number of iterations for the coordinate descent 
+      <td><p>Maximum number of iterations for the coordinate descent
 algorithm; default is 10^4.</p></td>
     </tr>
     <tr>
       <th>nr.maxit</th>
-      <td><p>Maximum number of iterations for the Newton-Raphson method; 
+      <td><p>Maximum number of iterations for the Newton-Raphson method;
 default is 500.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Additional argument. These include some of the original arguments 
-to 'glmtlp', and each must be named if used.</p></td>
+      <td><p>Additional arguments.</p></td>
     </tr>
     </table>
 
@@ -272,52 +259,42 @@ to 'glmtlp', and each must be named if used.</p></td>
 
     <p>An object with S3 class <code>"glmtlp"</code>.</p>
 <dt>beta</dt><dd><p>a <code>nvars x length(kappa)</code> matrix of
-  coefficients when penalty is 'l0'; a <code>nvars x length(lambda)</code> matrix of
-  coefficients when penalty is 'l1' and 'tlp'.</p></dd>
-<dt>call</dt><dd><p>the call that produced this object.</p></dd> 
+  coefficients when <code>penalty = 'l0'</code>; or a <code>nvars x length(lambda)</code>
+  matrix of coefficients when <code>penalty = c('l1', 'tlp')</code>.</p></dd>
+<dt>call</dt><dd><p>the call that produces this object.</p></dd>
 <dt>family</dt><dd><p>the distribution family used in the model fitting.</p></dd>
-<dt>intercept</dt><dd><p>the intercept vector, of length(kappa) or length(lambda).</p></dd>
-<dt>lambda</dt><dd><p>The actual sequence of <code>lambda</code> values used. Note that 
-  the length may be smaller than the provided <code>nlambda</code> due to removal 
-  of saturated values.</p></dd> 
+<dt>intercept</dt><dd><p>the intercept vector, of <code><a href='https://rdrr.io/r/base/length.html'>length(kappa)</a></code> when
+  <code>penalty = 'l0'</code> or <code><a href='https://rdrr.io/r/base/length.html'>length(lambda)</a></code> when
+  <code>penalty = c('l1', 'tlp')</code>.</p></dd>
+<dt>lambda</dt><dd><p>the actual sequence of <code>lambda</code> values used. Note that
+  the length may be smaller than the provided <code>nlambda</code> due to removal
+  of saturated values.</p></dd>
 <dt>penalty</dt><dd><p>the penalty type in the model fitting.</p></dd>
 <dt>penalty.factor</dt><dd><p>the penalty factor for each coefficient used in the model fitting.</p></dd>
-<dt>tau</dt><dd><p>the tuning parameter used in the model fitting, available when 
-  penalty = 'tlp'.</p></dd>
-<dt>user.lambda</dt><dd><p>logical, whether or not the used <code>lambda</code> sequence is 
-  provided by the user.</p></dd>
-<dt>user.kappa</dt><dd><p>logical, whether or not the used <code>kappa</code> sequence is 
-  provided by the user, available when penalty = 'l0'.</p></dd>
+<dt>tau</dt><dd><p>the tuning parameter used in the model fitting, available when
+  <code>penalty = 'tlp'</code>.</p></dd>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The objective function for <code>"gaussian"</code> is $$1/2 RSS/nobs +
-  \lambda*penalty,$$ and for the other models it is $$-loglik/nobs + 
-  \lambda*penalty.$$ 
-  Note also that for <code>"gaussian"</code>, <code>glmtlp</code> standardizes y to 
-  have unit variance (using 1/(n-1) formula). The coefficients for any 
-  predictor variables with zero variance are set to zero for all values of 
-  lambda.</p>
-<p>## Details on `family` option</p>
-<p>glmtlp currently only supports built-in families.</p>
-<p>The built in families are specified via a character string. For all families,
-the object produced is a regularization path for fitting the generalized 
-linear regression paths, by maximizing the appropriate penalized
-log-likelihood. Sometimes the sequence is truncated before <code>nlambda</code> 
-values of <code>lambda</code> have been used, because of instabilities in the 
-inverse link functions near a saturated fit. <code>glmtlp(..., family="binomial")</code> 
-fits a traditional logistic regression model for the log-odds.
-<code>glmtlp(..., family="multinomial")</code> fits a symmetric multinomial model,
-where each class is represented by a linear model (on the log-scale). The
-penalties take care of redundancies. A two-class <code>"multinomial"</code> model
-will produce the same fit as the corresponding <code>"binomial"</code> model,
-except the pair of coefficient matrices will be equal in magnitude and
-opposite in sign, and half the <code>"binomial"</code> values.</p>
-<p>## Details on `penalty` option</p>
-<p>The built in penalties are specified by a character string. For <code>l0</code> 
-  penalty, <code>kappa</code> sequence is used for generating the regularization 
-  path, while for the other penalties, <code>lambda</code> sequence is used for 
-  generating the regularization path.</p>
+    <p>The sequence of models indexed by <code>lambda</code> (when <code>penalty = c('l1', 'tlp')</code>)
+  or <code>kappa</code> (when <code>penalty = 'l0'</code>) is fit by the coordinate
+  descent algorithm.</p>
+<p>The objective function for the <code>"gaussian"</code> family is:
+  $$1/2 RSS/nobs + \lambda*penalty,$$ and for the other models it is:
+  $$-loglik/nobs + \lambda*penalty.$$
+  Also note that, for <code>"gaussian"</code>, <code>glmtlp</code> standardizes y to
+  have unit variance (using 1/(n-1) formula).</p>
+<p>## Details on <code>family</code> option</p>
+<p><code>glmtlp</code> currently only supports built-in families, which are specified by a
+  character string. For all families, the returned object is a regularization
+  path for fitting the generalized linear regression models, by maximizing the
+  corresponding penalized log-likelihood. <code>glmtlp(..., family="binomial")</code>
+  fits a traditional logistic regression model for the log-odds.</p>
+<p>## Details on <code>penalty</code> option</p>
+<p>The built-in penalties are specified by a character string. For <code>l0</code>
+  penalty, <code>kappa</code> sequence is used for generating the regularization
+  path, while for <code>l1</code> and <code>tlp</code> penalty, <code>lambda</code> sequence
+  is used for generating the regularization path.</p>
     <h2 class="hasAnchor" id="glmtlp-functions"><a class="anchor" href="#glmtlp-functions"></a>glmtlp functions</h2>
 
     
@@ -325,12 +302,18 @@ opposite in sign, and half the <code>"binomial"</code> values.</p>
 <p>`glmtlp()`, `cv.glmtlp()`</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Shen, X., Pan, W., &amp; Zhu, Y. (2012). 
-  <em>Likelihood-based selection and sharp parameter estimation. 
+    <p>Shen, X., Pan, W., &amp; Zhu, Y. (2012).
+  <em>Likelihood-based selection and sharp parameter estimation.
   Journal of the American Statistical Association, 107(497), 223-232.</em>
-  <br /> Yang, Y., &amp; Zou, H. (2014). <em>A coordinate majorization descent algorithm 
-  for l1 penalized learning. Journal of Statistical Computation and 
-  Simulation, 84(1), 84-95.</em>
+  <br /> Shen, X., Pan, W., Zhu, Y., &amp; Zhou, H. (2013).
+  <em>On constrained and regularized high-dimensional regression.
+  Annals of the Institute of Statistical Mathematics, 65(5), 807-832.</em>
+  <br /> Li, C., Shen, X., &amp; Pan, W. (2021).
+  <em>Inference for a Large Directed Graphical Model with Interventions.
+  arXiv preprint arXiv:2110.03805.</em>
+  <br /> Yang, Y., &amp; Zou, H. (2014).
+  <em>A coordinate majorization descent algorithm for l1 penalized learning.
+  Journal of Statistical Computation and Simulation, 84(1), 84-95.</em>
   <br /> Two R package Github: <em>ncvreg</em> and <em>glmnet</em>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -353,9 +336,8 @@ and the <code>cv.glmtlp</code> function.</p></div>
 <span class='co'># Binomial</span>
 
 <span class='va'>X</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>100</span> <span class='op'>*</span> <span class='fl'>20</span><span class='op'>)</span>, <span class='fl'>100</span>, <span class='fl'>20</span><span class='op'>)</span>
-<span class='va'>y</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>1</span><span class='op'>)</span>, <span class='fl'>100</span>, replace <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='va'>y</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span>, <span class='fl'>100</span>, replace <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 <span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'>glmtlp</span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>y</span>, family <span class='op'>=</span> <span class='st'>"binomial"</span>, penalty <span class='op'>=</span> <span class='st'>"l1"</span><span class='op'>)</span>
-
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

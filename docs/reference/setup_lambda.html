@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Changelog • glmtlp</title>
+<title>Generate lambda sequence. — setup_lambda • glmtlp</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,8 @@
 
 
 
-<meta property="og:title" content="Changelog" />
+<meta property="og:title" content="Generate lambda sequence. — setup_lambda" />
+<meta property="og:description" content="Generate lambda sequence." />
 
 
 
@@ -58,7 +59,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-news">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -108,45 +109,55 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1 data-toc-skip>Changelog <small></small></h1>
-      
+    <h1>Generate lambda sequence.</h1>
+    
+    <div class="hidden name"><code>setup_lambda.Rd</code></div>
     </div>
 
-    <div id="glmtlp-201" class="section level1">
-<h1 class="page-header" data-toc-text="2.0.1">
-<a href="#glmtlp-201" class="anchor"></a>glmtlp 2.0.1<small> Unreleased </small>
-</h1>
-<ul>
-<li>fix bugs in the default <code>kappa</code> sequence setting</li>
-<li>update the default hyper-parameter settings</li>
-<li>update plotting for the<code>l0</code> penalty</li>
-<li>update R function documentations</li>
-<li>update the core algorithms and cv function to reduce memory occupation</li>
-<li>add data simulation functions and update data sets</li>
-<li>add <code>l0</code> and <code>tlp</code> options to logistic regression models</li>
-<li>remove <code>foreach</code> and <code>parallel</code> from Depends</li>
-<li>update vignettes and README</li>
-</ul>
-</div>
-    <div id="glmtlp-200" class="section level1">
-<h1 class="page-header" data-toc-text="2.0.0">
-<a href="#glmtlp-200" class="anchor"></a>glmtlp 2.0.0<small> 2021-10-15 </small>
-</h1>
-<p>A new version of <code>glmtlp</code>.</p>
-<ul>
-<li>not compatible with our previous version 1.1.<br>
-</li>
-<li>uses C++ as the core.</li>
-</ul>
-</div>
-  </div>
+    <div class="ref-description">
+    <p>Generate lambda sequence.</p>
+    </div>
 
+    <pre class="usage"><span class='fu'>setup_lambda</span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>y</span>, <span class='va'>weights</span>, <span class='va'>lambda.min.ratio</span>, <span class='va'>nlambda</span><span class='op'>)</span></pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>X</th>
+      <td><p>Input matrix, of dimension <code>nobs</code> x <code>nvars</code>; 
+each row is  an observation vector.</p></td>
+    </tr>
+    <tr>
+      <th>y</th>
+      <td><p>Response variable, of length <code>nobs</code>. For <code>family="gaussian"</code>, 
+it should be quantitative; for <code>family="binomial"</code>, it should be either 
+a factor with two levels or a binary vector.</p></td>
+    </tr>
+    <tr>
+      <th>weights</th>
+      <td><p>Observation weights.</p></td>
+    </tr>
+    <tr>
+      <th>lambda.min.ratio</th>
+      <td><p>The smallest value for <code>lambda</code>, as a fraction of 
+<code>lambda.max</code>, the smallest value for which all coefficients are zero. 
+The default depends on the sample size <code>nobs</code> relative to the number 
+of variables <code>nvars</code>.</p></td>
+    </tr>
+    <tr>
+      <th>nlambda</th>
+      <td><p>The number of <code>lambda</code> values.</p></td>
+    </tr>
+    </table>
+
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
-
 </div>
 
 

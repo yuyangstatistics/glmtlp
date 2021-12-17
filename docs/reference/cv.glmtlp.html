@@ -40,8 +40,9 @@
 
 
 <meta property="og:title" content="Cross-validation for glmtlp — cv.glmtlp" />
-<meta property="og:description" content="Does k-fold cross-validation for glmtlp, produces a plot, and returns a
-value for lambda (or kappa if penalty=&quot;l0&quot;)." />
+<meta property="og:description" content="Performs k-fold cross-validation for l0, l1, or TLP-penalized regression models 
+over a grid of values for the regularization parameter lambda 
+(if penalty=&quot;l0&quot;) or kappa (if penalty=&quot;l0&quot;)." />
 
 
 
@@ -73,7 +74,7 @@ value for lambda (or kappa if penalty=&quot;l0&quot;)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">glmtlp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.1</span>
       </span>
     </div>
 
@@ -116,8 +117,9 @@ value for lambda (or kappa if penalty=&quot;l0&quot;)." />
     </div>
 
     <div class="ref-description">
-    <p>Does k-fold cross-validation for glmtlp, produces a plot, and returns a
-value for <code>lambda</code> (or <code>kappa</code> if <code>penalty="l0"</code>).</p>
+    <p>Performs k-fold cross-validation for l0, l1, or TLP-penalized regression models 
+over a grid of values for the regularization parameter <code>lambda</code> 
+(if <code>penalty="l0"</code>) or <code>kappa</code> (if <code>penalty="l0"</code>).</p>
     </div>
 
     <pre class="usage"><span class='fu'>cv.glmtlp</span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>y</span>, <span class='va'>...</span>, seed <span class='op'>=</span> <span class='cn'>NULL</span>, nfolds <span class='op'>=</span> <span class='fl'>10</span>, obs.fold <span class='op'>=</span> <span class='cn'>NULL</span>, ncores <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span></pre>
@@ -136,7 +138,7 @@ value for <code>lambda</code> (or <code>kappa</code> if <code>penalty="l0"</code
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Other arguments that can be passed to <code>glmtlp</code></p></td>
+      <td><p>Other arguments that can be passed to <code>glmtlp</code>.</p></td>
     </tr>
     <tr>
       <th>seed</th>
@@ -144,9 +146,8 @@ value for <code>lambda</code> (or <code>kappa</code> if <code>penalty="l0"</code
     </tr>
     <tr>
       <th>nfolds</th>
-      <td><p>number of folds; default is 10. Although <code>nfolds</code> can be
-as large as the sample size (leave-one-out CV), it is not recommended for
-large datasets. The smallest value allowable is <code>nfolds=3</code></p></td>
+      <td><p>number of folds; default is 10. The smallest value allowable 
+is <code>nfolds=3</code></p></td>
     </tr>
     <tr>
       <th>obs.fold</th>
@@ -157,8 +158,9 @@ be missing.</p></td>
     <tr>
       <th>ncores</th>
       <td><p>number of cores utilized; default is 1. If greater than 1, 
-then use <code>doParallel::foreach</code> to fit each fold; if equal to 1, then 
-use for loop to fit each fold. No need to register parallel outside.</p></td>
+then <code>doParallel::foreach</code> will be used to fit each fold; if equal to 
+1, then for loop will be used to fit each fold. Users don't have to register 
+parallel clusters outside.</p></td>
     </tr>
     </table>
 
@@ -168,16 +170,16 @@ use for loop to fit each fold. No need to register parallel outside.</p></td>
   with the ingredients of the cross-validation fit.</p>
 <dt>call</dt><dd><p>the function call</p></dd>
 <dt>cv.mean</dt><dd><p>The mean cross-validated error - a vector of length
-  <code><a href='https://rdrr.io/r/base/length.html'>length(kappa)</a></code> if <code>penalty = "l0"</code> and a vector of length 
-  <code>length{lambda}</code> otherwise.</p></dd> 
+  <code><a href='https://rdrr.io/r/base/length.html'>length(kappa)</a></code> if <code>penalty = "l0"</code> and <code>length{lambda}</code> 
+  otherwise.</p></dd> 
 <dt>cv.se</dt><dd><p>estimate of standard error of <code>cv.mean</code>.</p></dd> 
 <dt>fit</dt><dd><p>a fitted glmtlp object for the full data.</p></dd> 
 <dt>idx.min</dt><dd><p>the index of the <code>lambda</code> or <code>kappa</code> sequence that 
   corresponding to the smallest cv mean error.</p></dd>
 <dt>kappa</dt><dd><p>the values of <code>kappa</code> used in the fits, available when 
-  penalty = 'l0'.</p></dd>
+  <code>penalty = 'l0'</code>.</p></dd>
 <dt>kappa.min</dt><dd><p>the value of <code>kappa</code> that gives the minimum 
-  <code>cv.mean</code>, available when penalty is 'l0'.</p></dd>
+  <code>cv.mean</code>, available when <code>penalty = 'l0'</code>.</p></dd>
 <dt>lambda</dt><dd><p>the values of <code>lambda</code> used in the fits.</p></dd> 
 <dt>lambda.min</dt><dd><p>value of <code>lambda</code> that gives minimum <code>cv.mean</code>,  
   available when penalty is 'l1' or 'tlp'.</p></dd> 
@@ -186,19 +188,28 @@ use for loop to fit each fold. No need to register parallel outside.</p></td>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The function runs <code>glmtlp</code> <code>nfolds</code>+1 times; the first to get the
-  <code>lambda</code> or <code>kappa</code> sequence, and then the remainder to compute 
-  the fit with each of the folds omitted. The error is accumulated, and the 
-  average (haven't finished yet) error and standard deviation over the folds 
-  is computed.</p>
+    <p>The function calls <code>glmtlp</code> <code>nfolds</code>+1 times; the first call to get the
+  <code>lambda</code> or <code>kappa</code> sequence, and then the rest to compute 
+  the fit with each of the folds omitted. The cross-validation error is based 
+  on deviance (check here for more details). The error is accumulated over the 
+  folds, and the average error and standard deviation is computed.</p>  
+<p>When <code>family = "binomial"</code>, the fold assignment (if not provided by 
+  the user) is generated in a stratified manner, where the ratio of 0/1 outcomes 
+  are the same for each fold.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Shen, X., Pan, W., &amp; Zhu, Y. (2012). 
   <em>Likelihood-based selection and sharp parameter estimation. 
   Journal of the American Statistical Association, 107(497), 223-232.</em>
-  <br /> Yang, Y., &amp; Zou, H. (2014). <em>A coordinate majorization descent algorithm 
-  for l1 penalized learning. Journal of Statistical Computation and 
-  Simulation, 84(1), 84-95.</em>
+  <br /> Shen, X., Pan, W., Zhu, Y., &amp; Zhou, H. (2013). 
+  <em>On constrained and regularized high-dimensional regression. 
+  Annals of the Institute of Statistical Mathematics, 65(5), 807-832.</em>
+  <br /> Li, C., Shen, X., &amp; Pan, W. (2021). 
+  <em>Inference for a Large Directed Graphical Model with Interventions. 
+  arXiv preprint arXiv:2110.03805.</em>
+  <br /> Yang, Y., &amp; Zou, H. (2014). 
+  <em>A coordinate majorization descent algorithm for l1 penalized learning. 
+  Journal of Statistical Computation and Simulation, 84(1), 84-95.</em>
   <br /> Two R package Github: <em>ncvreg</em> and <em>glmnet</em>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 

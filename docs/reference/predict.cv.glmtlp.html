@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>make predictions from a "cv.glmtlp" object. — predict.cv.glmtlp • glmtlp</title>
+<title>Predict Method for a "cv.glmtlp" Object. — predict.cv.glmtlp • glmtlp</title>
 
 
 <!-- jquery -->
@@ -39,10 +39,10 @@
 
 
 
-<meta property="og:title" content="make predictions from a "cv.glmtlp" object. — predict.cv.glmtlp" />
-<meta property="og:description" content="This function makes predictions from a cross-validated glmtlp model, using
-the stored &quot;glmtlp&quot; object, and the optimal value chosen for
-lambda." />
+<meta property="og:title" content="Predict Method for a "cv.glmtlp" Object. — predict.cv.glmtlp" />
+<meta property="og:description" content="Makes predictions for a cross-validated glmtlp model, using
+  the stored &quot;glmtlp&quot; object, and the optimal value chosen for
+  lambda." />
 
 
 
@@ -74,7 +74,7 @@ lambda." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">glmtlp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.1</span>
       </span>
     </div>
 
@@ -111,15 +111,15 @@ lambda." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>make predictions from a "cv.glmtlp" object.</h1>
+    <h1>Predict Method for a "cv.glmtlp" Object.</h1>
     
     <div class="hidden name"><code>predict.cv.glmtlp.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function makes predictions from a cross-validated glmtlp model, using
-the stored <code>"glmtlp"</code> object, and the optimal value chosen for
-<code>lambda</code>.</p>
+    <p>Makes predictions for a cross-validated glmtlp model, using
+  the stored <code>"glmtlp"</code> object, and the optimal value chosen for
+  <code>lambda</code>.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for cv.glmtlp</span>
@@ -145,42 +145,40 @@ the stored <code>"glmtlp"</code> object, and the optimal value chosen for
     </tr>
     <tr>
       <th>X</th>
-      <td><p>Matrix of new values for <code>x</code> at which predictions are to be
-made. Must be a matrix. See documentation for <code>predict.glmtlp</code>.</p></td>
+      <td><p>X Matrix of new values for <code>X</code> at which predictions are to be
+made. Must be a matrix.</p></td>
     </tr>
     <tr>
       <th>type</th>
-      <td><p>Type of prediction required. Type <code>"link"</code> gives the linear
-predictors for <code>"binomial"</code>
-models; for <code>"gaussian"</code> models it gives the fitted
-values. Type <code>"response"</code> gives the fitted probabilities for
-<code>"binomial"</code>; for <code>"gaussian"</code> type <code>"response"</code> is equivalent 
-to type <code>"link"</code>. Type <code>"coefficients"</code> computes the coefficients 
-at the requested values for <code>lambda</code> or <code>kappa</code>.  Note that for <code>"binomial"</code> 
+      <td><p>Type of prediction to be made. For <code>"gaussian"</code> models, type 
+<code>"link"</code> and <code>"response"</code> are equivalent and both give the fitted 
+values. For <code>"binomial"</code> models, type <code>"link"</code> gives the linear 
+predictors and type <code>"response"</code> gives the fitted probabilities. 
+Type <code>"coefficients"</code> computes the coefficients at the provided values 
+of <code>lambda</code> or <code>kappa</code>. Note that for <code>"binomial"</code> 
 models, results are returned only for the class corresponding to the second 
 level of the factor response. Type <code>"class"</code> applies only to 
-<code>"binomial"</code> models, and produces the class 
-label corresponding to the maximum probability. Type <code>"numnz"</code> returns the 
-total number of non-zeros coefficients for each value of <code>lambda</code> or 
-<code>kappa</code>. Type <code>"varnz"</code> returns 
-a list of the indices of the nonzero coefficients for each value of 
-<code>lambda</code> or <code>kappa</code>.</p></td>
+<code>"binomial"</code> models, and gives the class label corresponding to the 
+maximum probability. Type <code>"numnz"</code> gives the total number of non-zero 
+coefficients for each value of <code>lambda</code> or <code>kappa</code>. Type 
+<code>"varnz"</code> gives a list of indices of the nonzero coefficients for 
+each value of <code>lambda</code> or <code>kappa</code>.</p></td>
     </tr>
     <tr>
       <th>lambda</th>
       <td><p>Value of the penalty parameter <code>lambda</code> at which predictions
-are required. Default is NULL.</p></td>
+are to be made Default is NULL.</p></td>
     </tr>
     <tr>
       <th>kappa</th>
       <td><p>Value of the penalty parameter <code>kappa</code> at which predictions 
-are required. Default is NULL.</p></td>
+are to be made. Default is NULL.</p></td>
     </tr>
     <tr>
       <th>which</th>
       <td><p>Index of the penalty parameter <code>lambda</code> or <code>kappa</code> 
-sequence at which predictions are required. Default is the <code>idx.min</code> stored
-on the CV <code>object</code>.</p></td>
+sequence at which predictions are to be made. Default is the <code>idx.min</code> 
+stored in the <code>cv.glmtp</code> object.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -190,20 +188,21 @@ on the CV <code>object</code>.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The object returned depends on the ... argument which is passed
-on to the <code>predict</code> method for <code>glmtlp</code> objects.</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>This function makes it easier to use the results of cross-validation to make
-a prediction.</p>
+    <p>The object returned depends on <code>type</code>.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Shen, X., Pan, W., &amp; Zhu, Y. (2012). 
   <em>Likelihood-based selection and sharp parameter estimation. 
   Journal of the American Statistical Association, 107(497), 223-232.</em>
-  <br /> Yang, Y., &amp; Zou, H. (2014). <em>A coordinate majorization descent algorithm 
-  for l1 penalized learning. Journal of Statistical Computation and 
-  Simulation, 84(1), 84-95.</em>
+  <br /> Shen, X., Pan, W., Zhu, Y., &amp; Zhou, H. (2013). 
+  <em>On constrained and regularized high-dimensional regression. 
+  Annals of the Institute of Statistical Mathematics, 65(5), 807-832.</em>
+  <br /> Li, C., Shen, X., &amp; Pan, W. (2021). 
+  <em>Inference for a Large Directed Graphical Model with Interventions. 
+  arXiv preprint arXiv:2110.03805.</em>
+  <br /> Yang, Y., &amp; Zou, H. (2014). 
+  <em>A coordinate majorization descent algorithm for l1 penalized learning. 
+  Journal of Statistical Computation and Simulation, 84(1), 84-95.</em>
   <br /> Two R package Github: <em>ncvreg</em> and <em>glmnet</em>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -219,16 +218,14 @@ and the <code>cv.glmtlp</code> function.</p></div>
 <span class='va'>y</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>100</span><span class='op'>)</span>
 <span class='va'>cv.fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='cv.glmtlp.html'>cv.glmtlp</a></span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>y</span>, family <span class='op'>=</span> <span class='st'>"gaussian"</span>, penalty <span class='op'>=</span> <span class='st'>"l1"</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>cv.fit</span>, X <span class='op'>=</span> <span class='va'>X</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>, <span class='op'>]</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] -0.03861472  0.20722139  0.17142453  0.11708130  0.12029364</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span><span class='op'>(</span><span class='va'>cv.fit</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;   intercept          V1          V2          V3          V4          V5 
-#&gt;  0.08880861  0.00000000  0.00000000  0.00000000  0.00000000  0.00000000 
-#&gt;          V6          V7          V8          V9         V10         V11 
-#&gt;  0.00000000  0.00000000  0.00000000  0.00000000 -0.13993547  0.00000000 
-#&gt;         V12         V13         V14         V15         V16         V17 
-#&gt;  0.00000000  0.00000000  0.00000000  0.00000000  0.00000000 -0.03043163 
-#&gt;         V18         V19         V20 
-#&gt;  0.00000000  0.00000000  0.00000000 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>cv.fit</span>, X <span class='op'>=</span> <span class='va'>X</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>, <span class='op'>]</span>, lambda <span class='op'>=</span> <span class='fl'>0.1</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] -0.1826316  0.2702681  0.2246775  0.1082916  0.1361339</div><div class='input'>
+</div><div class='output co'>#&gt; [1] 0.04564887 0.04564887 0.04564887 0.04564887 0.04564887</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span><span class='op'>(</span><span class='va'>cv.fit</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;  intercept         V1         V2         V3         V4         V5         V6 
+#&gt; 0.04564887 0.00000000 0.00000000 0.00000000 0.00000000 0.00000000 0.00000000 
+#&gt;         V7         V8         V9        V10        V11        V12        V13 
+#&gt; 0.00000000 0.00000000 0.00000000 0.00000000 0.00000000 0.00000000 0.00000000 
+#&gt;        V14        V15        V16        V17        V18        V19        V20 
+#&gt; 0.00000000 0.00000000 0.00000000 0.00000000 0.00000000 0.00000000 0.00000000 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>cv.fit</span>, X <span class='op'>=</span> <span class='va'>X</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>, <span class='op'>]</span>, lambda <span class='op'>=</span> <span class='fl'>0.1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] -0.06388020 -0.09547175  0.26124340 -0.20715326  0.18311460</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

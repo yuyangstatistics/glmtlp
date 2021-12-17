@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>plot the cross-validation curve produced by cv.glmtlp — plot.cv.glmtlp • glmtlp</title>
+<title>Plot Method for a "cv.glmtlp" Object — plot.cv.glmtlp • glmtlp</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,9 @@
 
 
 
-<meta property="og:title" content="plot the cross-validation curve produced by cv.glmtlp — plot.cv.glmtlp" />
-<meta property="og:description" content="Plots the cross-validation curve, and upper and lower standard deviation
-  curves, as a function of the lambda or kappa values used." />
+<meta property="og:title" content="Plot Method for a "cv.glmtlp" Object — plot.cv.glmtlp" />
+<meta property="og:description" content="Plots the cross-validation curve, and the upper and lower standard deviation
+  curves, as a function of the lambda or kappa values." />
 
 
 
@@ -73,7 +73,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">glmtlp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.1</span>
       </span>
     </div>
 
@@ -110,14 +110,14 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>plot the cross-validation curve produced by cv.glmtlp</h1>
+    <h1>Plot Method for a "cv.glmtlp" Object</h1>
     
     <div class="hidden name"><code>plot.cv.glmtlp.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Plots the cross-validation curve, and upper and lower standard deviation
-  curves, as a function of the <code>lambda</code> or <code>kappa</code> values used.</p>
+    <p>Plots the cross-validation curve, and the upper and lower standard deviation
+  curves, as a function of the <code>lambda</code> or <code>kappa</code> values.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for cv.glmtlp</span>
@@ -128,30 +128,37 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>Fitted <code>"cv.glmtlp"</code> object</p></td>
+      <td><p>Fitted <code>cv.glmtlp</code> object</p></td>
     </tr>
     <tr>
       <th>vertical.line</th>
-      <td><p>Logical. Whether to include a vertical line indicating the 
-position of the index which gives the smallest CV error.</p></td>
+      <td><p>Logical. Whether or not include a vertical line 
+indicating the position of the index which gives the smallest CV error.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Other graphical parameters to plot</p></td>
+      <td><p>Additional arguments.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>A plot is produced, and a ggplot object is returned.</p>
+    <p>The generated plot is a <code>ggplot</code> object, and therefore, the users are able 
+  to customize the plots following the <code>ggplot2</code> syntax.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Shen, X., Pan, W., &amp; Zhu, Y. (2012). 
   <em>Likelihood-based selection and sharp parameter estimation. 
   Journal of the American Statistical Association, 107(497), 223-232.</em>
-  <br /> Yang, Y., &amp; Zou, H. (2014). <em>A coordinate majorization descent algorithm 
-  for l1 penalized learning. Journal of Statistical Computation and 
-  Simulation, 84(1), 84-95.</em>
+  <br /> Shen, X., Pan, W., Zhu, Y., &amp; Zhou, H. (2013). 
+  <em>On constrained and regularized high-dimensional regression. 
+  Annals of the Institute of Statistical Mathematics, 65(5), 807-832.</em>
+  <br /> Li, C., Shen, X., &amp; Pan, W. (2021). 
+  <em>Inference for a Large Directed Graphical Model with Interventions. 
+  arXiv preprint arXiv:2110.03805.</em>
+  <br /> Yang, Y., &amp; Zou, H. (2014). 
+  <em>A coordinate majorization descent algorithm for l1 penalized learning. 
+  Journal of Statistical Computation and Simulation, 84(1), 84-95.</em>
   <br /> Two R package Github: <em>ncvreg</em> and <em>glmnet</em>.</p>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
