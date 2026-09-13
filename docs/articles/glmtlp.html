@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>An Introduction to glmtlp • glmtlp</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="An Introduction to glmtlp">
 </head>
 <body>
@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">glmtlp</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,7 +54,7 @@
                         <h4 data-toc-skip class="author">Chunlin Li, Yu
 Yang, Chong Wu</h4>
             
-            <h4 data-toc-skip class="date">October 02, 2024</h4>
+            <h4 data-toc-skip class="date">September 13, 2026</h4>
       
 
       <div class="d-none name"><code>glmtlp.Rmd</code></div>
@@ -124,7 +124,15 @@ annotate the curves by setting <code>label=TRUE</code>.
 <code>"kappa"</code>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">fit</span>, xvar <span class="op">=</span> <span class="st">"lambda"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="glmtlp_files/figure-html/unnamed-chunk-6-1.png" alt="Solution Path Plot: coefficients against parameter lambda." width="700"></p>
+<pre><code><span><span class="co">## Warning: `aes_string()` was deprecated in ggplot2 3.0.0.</span></span>
+<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Please use tidy evaluation idioms with `aes()`.</span></span>
+<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> See also `vignette("ggplot2-in-packages")` for more information.</span></span>
+<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> The deprecated feature was likely used in the <span style="color: #0000BB;">glmtlp</span> package.</span></span>
+<span><span class="co">##   Please report the issue to the authors.</span></span>
+<span><span class="co">## <span style="color: #555555;">This warning is displayed once per session.</span></span></span>
+<span><span class="co">## <span style="color: #555555;">Call `lifecycle::last_lifecycle_warnings()` to see where this warning was</span></span></span>
+<span><span class="co">## <span style="color: #555555;">generated.</span></span></span></code></pre>
+<p><img src="glmtlp_files/figure-html/unnamed-chunk-6-1.png" class="r-plt" alt="Solution Path Plot: coefficients against parameter lambda." width="700"></p>
 <p>We can use the <code>coef</code> function to obtain the fitted
 coefficients. By default, the results would be a matrix, with each
 column representing the coefficients for every
@@ -141,7 +149,7 @@ or
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>κ</mi><annotation encoding="application/x-tex">\kappa</annotation></semantics></math>
 parameter should be in the range of the parameter sequence used in the
 fitted model.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="va">...</span></span>
 <span><span class="co">##              1.32501    1.23571    1.15242     1.07475     1.00232     0.93477</span></span>
@@ -155,7 +163,7 @@ fitted model.</p>
 <span><span class="co">## V7         0.0000000  0.0000000  0.0000000  0.00000000  0.00000000  0.00000000</span></span>
 <span><span class="co">## V8         0.0000000  0.0000000  0.0000000  0.00000000  0.00000000  0.00000000</span></span>
 <span><span class="va">...</span></span></code></pre>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">fit</span>, lambda <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="va">...</span></span>
 <span><span class="co">##   intercept          V1          V2          V3          V4          V5 </span></span>
@@ -175,10 +183,10 @@ matrix and the type of prediction to be made. Also, users can provide
 the desired level of regularization parameters or the indices of the
 parameter sequence. If neither is provided, then the prediction will be
 made for the whole lambda or kappa sequence.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">fit</span>, <span class="va">X</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="op">]</span>, lambda <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1]  0.09972438  2.66195238 -1.33516956  0.33721013 -2.63615326</span></span></code></pre>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">fit</span>, <span class="va">X</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="op">]</span>, which <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="co"># the 10th lambda in the lambda sequence</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1]  0.1906092  2.2279251 -1.4255474  0.9313526 -2.8151620</span></span></code></pre>
 <p>Cross-validation can be implemented by <code>cv.glmtlp</code> to find
@@ -187,7 +195,7 @@ the best regularization parameter. <code>cv.glmtlp</code> returns a
 cross-validated fit. Users may use <code>coef</code>,
 <code>predict</code>, and <code>plot</code> to further check the
 cross-validation results.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cv.fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/cv.glmtlp.html">cv.glmtlp</a></span><span class="op">(</span><span class="va">X</span>, <span class="va">y</span>, family <span class="op">=</span> <span class="st">"gaussian"</span>, penalty <span class="op">=</span> <span class="st">"tlp"</span><span class="op">)</span></span></code></pre></div>
 <p>The <code>plot</code> method will plot the deviance against the
 parameter sequence. The vertical dashed line shows the position of the
@@ -195,13 +203,13 @@ index where the smallest CV error is achieved, and users may also choose
 to omit it by setting <code>vertical.line = FALSE</code>. Again, the
 output is a <code>ggplot</code> object, so users are free to make
 modifications to it.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">cv.fit</span><span class="op">)</span></span></code></pre></div>
-<p><img src="glmtlp_files/figure-html/unnamed-chunk-10-1.png" alt="Cross-Validation Plot: deviance against log(lambda)." width="700"></p>
+<p><img src="glmtlp_files/figure-html/unnamed-chunk-10-1.png" class="r-plt" alt="Cross-Validation Plot: deviance against log(lambda)." width="700"></p>
 <p>The <code>coef</code> and <code>predict</code> method by default use
 the parameter that gives the smallest CV error, namely,
 <code>which = cv.fit$idx.min</code>.</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">cv.fit</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    intercept           V1           V2           V3           V4           V5 </span></span>
 <span><span class="co">## -0.009695669  1.240195285  0.000000000  0.000000000  0.000000000  0.000000000 </span></span>
@@ -211,7 +219,7 @@ the parameter that gives the smallest CV error, namely,
 <span><span class="co">##  0.000000000  0.000000000  0.000000000  1.125977511  0.000000000  0.000000000 </span></span>
 <span><span class="co">##          V18          V19          V20 </span></span>
 <span><span class="co">##  0.000000000  0.000000000  0.981387932</span></span></code></pre>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">cv.fit</span>, <span class="va">X</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1]  0.1906096  2.2279220 -1.4255447  0.9313487 -2.8151577</span></span></code></pre>
 </div>
@@ -252,7 +260,7 @@ Statistics</em>, 26(1), 195-204. <a href="https://doi.org/10.1080/10618600.2015.
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>
